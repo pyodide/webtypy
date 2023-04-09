@@ -35,3 +35,4 @@ dist/
 xbuildenv/
 tools/symlinks
 xbuildenv/
+.env

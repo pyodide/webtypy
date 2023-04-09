@@ -2,8 +2,12 @@ from js_pyi.clipboard import clip_copy
 from js_pyi.produce import produce
 
 
+def generate_python():
+    return _head + produce() + _tail
+
+
 def main():
-    code = _head + produce() + _tail
+    code = generate_python()
     print(code)
     clip_copy(code)
 
