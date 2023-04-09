@@ -1,0 +1,8 @@
+name: webtypy-env
+#channels:
+#  - conda-forge
+dependencies:
+  - python=3.11
+  - pytest
+  - pip:
+      - widlparser
