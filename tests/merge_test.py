@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from js_pyi.datamodel import GMethod
 from js_pyi.ingest import ingest
-from js_pyi.ingest_stringify_test import _append_base
 from js_pyi.merge import merge
+from tests.ingest_stringify_test import _append_base
 
 
 def test_merge():
