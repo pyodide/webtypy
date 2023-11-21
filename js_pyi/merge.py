@@ -11,8 +11,9 @@ def _fix_constructor(cl: GClass):
     constructors = list(filter(lambda m: isinstance(m, GMethod) and m.name == 'constructor', cl.children))
     for c in constructors:
         c: GMethod
-        c.name = 'New'
+        c.name = 'new'
         c.returns = cl.name
+        c.classmethod = True
         cl.children.remove(c)
 
     cl.children[:0] = constructors

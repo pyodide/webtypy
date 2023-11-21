@@ -123,6 +123,7 @@ class GMethod(GStmt, GPythonProducer):
     arguments: List[GArg] = field(default_factory=list)
     returns: Optional[GAnnotation] = 'undefined'
     overload: bool = False
+    classmethod: bool = False
 
     def to_python(self): return s_method(self)
 

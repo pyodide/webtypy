@@ -66,6 +66,8 @@ def s_method(m: GMethod) -> str:
     decorator = ''
     if m.overload:
         decorator = '@overload\n'
+    if m.classmethod:
+        decorator += '@classmethod\n'
     return f'{decorator}def {name}({args_str}){returns}: ...'
 
 

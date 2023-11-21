@@ -49,10 +49,12 @@ def test_merge_constructor_overload():
     assert len(interface.children) == 2
     for m in interface.children:
         m: GMethod
-        assert m.name == 'New'
+        assert m.name == 'new'
         assert m.returns == 'Doc'
         assert m.overload
+        assert m.classmethod
         assert '@overload' in m.to_python()
+        assert '@classmethod' in m.to_python()
 
 
 def test_merge_namespace():
