@@ -1,0 +1,8 @@
+exclude: (^src.*$)
+default_language_version:
+  python: "3.11"
+repos:
+  - repo: https://github.com/psf/black
+    rev: "23.1.0"
+    hooks:
+      - id: black
