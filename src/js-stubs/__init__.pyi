@@ -951,7 +951,8 @@ class CSPViolationReportBody(ReportBody):
     columnNumber: int | None
 
 class SecurityPolicyViolationEvent(Event):
-    def New(self, type: str, eventInitDict: SecurityPolicyViolationEventInit | None = {}) -> SecurityPolicyViolationEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: SecurityPolicyViolationEventInit | None = {}) -> SecurityPolicyViolationEvent: ...
     documentURI: USVString
     referrer: USVString
     blockedURI: USVString
@@ -980,7 +981,8 @@ class SecurityPolicyViolationEventInit(TypedDict, EventInit):
     columnNumber: NotRequired[int]
 
 class XMLSerializer:
-    def New(self) -> XMLSerializer: ...
+    @classmethod
+    def new(self) -> XMLSerializer: ...
     def serializeToString(self, root: Node) -> str: ...
 
 class InnerHTML:
@@ -1073,7 +1075,8 @@ class ShadowRoot(DocumentFragment, InnerHTML, DocumentOrShadowRoot):
     onslotchange: EventHandler
 
 class Range(AbstractRange):
-    def New(self) -> Range: ...
+    @classmethod
+    def new(self) -> Range: ...
     def createContextualFragment(self, fragment: str) -> DocumentFragment: ...
     def getClientRects(self) -> DOMRectList: ...
     def getBoundingClientRect(self) -> DOMRect: ...
@@ -1254,7 +1257,8 @@ class IdentityCredentialLogoutRPsRequest(TypedDict):
 class IdentityProvider: ...
 
 class Blob:
-    def New(self, blobParts: Sequence[BlobPart] | None = None, options: BlobPropertyBag | None = {}) -> Blob: ...
+    @classmethod
+    def new(self, blobParts: Sequence[BlobPart] | None = None, options: BlobPropertyBag | None = {}) -> Blob: ...
     size: int
     type: str
     def slice(self, start: int | None = None, end: int | None = None, contentType: str | None = None) -> Blob: ...
@@ -1267,7 +1271,8 @@ class BlobPropertyBag(TypedDict):
     endings: NotRequired[EndingType]
 
 class File(Blob):
-    def New(self, fileBits: Sequence[BlobPart], fileName: USVString, options: FilePropertyBag | None = {}) -> File: ...
+    @classmethod
+    def new(self, fileBits: Sequence[BlobPart], fileName: USVString, options: FilePropertyBag | None = {}) -> File: ...
     name: str
     lastModified: int
     webkitRelativePath: USVString
@@ -1279,7 +1284,8 @@ class FileList:
     length: int
 
 class FileReader(EventTarget):
-    def New(self) -> FileReader: ...
+    @classmethod
+    def new(self) -> FileReader: ...
     def readAsArrayBuffer(self, blob: Blob): ...
     def readAsBinaryString(self, blob: Blob): ...
     def readAsText(self, blob: Blob, encoding: str | None = None): ...
@@ -1299,14 +1305,16 @@ class FileReader(EventTarget):
     onloadend: EventHandler
 
 class FileReaderSync:
-    def New(self) -> FileReaderSync: ...
+    @classmethod
+    def new(self) -> FileReaderSync: ...
     def readAsArrayBuffer(self, blob: Blob) -> ArrayBuffer: ...
     def readAsBinaryString(self, blob: Blob) -> str: ...
     def readAsText(self, blob: Blob, encoding: str | None = None) -> str: ...
     def readAsDataURL(self, blob: Blob) -> str: ...
 
 class URL:
-    def New(self, url: USVString, base: USVString | None = None) -> URL: ...
+    @classmethod
+    def new(self, url: USVString, base: USVString | None = None) -> URL: ...
     href: USVString
     origin: USVString
     protocol: USVString
@@ -1335,7 +1343,8 @@ class IDBOpenDBRequest(IDBRequest):
     onupgradeneeded: EventHandler
 
 class IDBVersionChangeEvent(Event):
-    def New(self, type: str, eventInitDict: IDBVersionChangeEventInit | None = {}) -> IDBVersionChangeEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: IDBVersionChangeEventInit | None = {}) -> IDBVersionChangeEvent: ...
     oldVersion: int
     newVersion: int | None
 
@@ -1662,7 +1671,8 @@ class SVGURIReference:
     href: SVGAnimatedString
 
 class Document(Node, FontFaceSource, GeometryUtils, NonElementParentNode, DocumentOrShadowRoot, ParentNode, XPathEvaluatorBase, GlobalEventHandlers):
-    def New(self) -> Document: ...
+    @classmethod
+    def new(self) -> Document: ...
     rootElement: SVGSVGElement | None
     namedFlows: NamedFlowMap
     def startViewTransition(self, callback: UpdateCallback | None = None) -> ViewTransition: ...
@@ -1829,7 +1839,8 @@ class SVGElementInstance:
     correspondingUseElement: SVGUseElement | None
 
 class ShadowAnimation(Animation):
-    def New(self, source: Animation, newTarget: Element | CSSPseudoElement) -> ShadowAnimation: ...
+    @classmethod
+    def new(self, source: Animation, newTarget: Element | CSSPseudoElement) -> ShadowAnimation: ...
     sourceAnimation: Animation
 
 class SVGSwitchElement(SVGGraphicsElement): ...
@@ -2368,7 +2379,8 @@ class Pbkdf2Params(TypedDict, Algorithm):
     hash: HashAlgorithmIdentifier
 
 class Accelerometer(Sensor):
-    def New(self, options: AccelerometerSensorOptions | None = {}) -> Accelerometer: ...
+    @classmethod
+    def new(self, options: AccelerometerSensorOptions | None = {}) -> Accelerometer: ...
     x: float | None
     y: float | None
     z: float | None
@@ -2377,10 +2389,12 @@ class AccelerometerSensorOptions(TypedDict, SensorOptions):
     referenceFrame: NotRequired[AccelerometerLocalCoordinateSystem]
 
 class LinearAccelerationSensor(Accelerometer):
-    def New(self, options: AccelerometerSensorOptions | None = {}) -> LinearAccelerationSensor: ...
+    @classmethod
+    def new(self, options: AccelerometerSensorOptions | None = {}) -> LinearAccelerationSensor: ...
 
 class GravitySensor(Accelerometer):
-    def New(self, options: AccelerometerSensorOptions | None = {}) -> GravitySensor: ...
+    @classmethod
+    def new(self, options: AccelerometerSensorOptions | None = {}) -> GravitySensor: ...
 
 class AccelerometerReadingValues(TypedDict):
     x: float | None
@@ -2392,7 +2406,8 @@ class LinearAccelerationReadingValues(TypedDict, AccelerometerReadingValues): ..
 class GravityReadingValues(TypedDict, AccelerometerReadingValues): ...
 
 class AmbientLightSensor(Sensor):
-    def New(self, sensorOptions: SensorOptions | None = {}) -> AmbientLightSensor: ...
+    @classmethod
+    def new(self, sensorOptions: SensorOptions | None = {}) -> AmbientLightSensor: ...
     illuminance: float | None
 
 class AmbientLightReadingValues(TypedDict):
@@ -2463,7 +2478,8 @@ class HTMLAttributionSrcElementUtils:
     attributionSrc: USVString
 
 class HTMLAnchorElement(HTMLElement, HTMLAttributionSrcElementUtils, HTMLHyperlinkElementUtils):
-    def New(self) -> HTMLAnchorElement: ...
+    @classmethod
+    def new(self) -> HTMLAnchorElement: ...
     target: str
     download: str
     ping: USVString
@@ -2481,7 +2497,8 @@ class HTMLAnchorElement(HTMLElement, HTMLAttributionSrcElementUtils, HTMLHyperli
     attributionSourceId: int
 
 class HTMLImageElement(HTMLElement, HTMLAttributionSrcElementUtils):
-    def New(self) -> HTMLImageElement: ...
+    @classmethod
+    def new(self) -> HTMLImageElement: ...
     x: int
     y: int
     """ # GIgnoredStmt 
@@ -2514,7 +2531,8 @@ class HTMLImageElement(HTMLElement, HTMLAttributionSrcElementUtils):
     fetchPriority: str
 
 class HTMLScriptElement(HTMLElement, HTMLAttributionSrcElementUtils):
-    def New(self) -> HTMLScriptElement: ...
+    @classmethod
+    def new(self) -> HTMLScriptElement: ...
     src: USVString
     type: str
     noModule: bool
@@ -2722,14 +2740,16 @@ class BackgroundFetchRecord:
     responseReady: Awaitable[Response]
 
 class BackgroundFetchEvent(ExtendableEvent):
-    def New(self, type: str, init: BackgroundFetchEventInit) -> BackgroundFetchEvent: ...
+    @classmethod
+    def new(self, type: str, init: BackgroundFetchEventInit) -> BackgroundFetchEvent: ...
     registration: BackgroundFetchRegistration
 
 class BackgroundFetchEventInit(TypedDict, ExtendableEventInit):
     registration: BackgroundFetchRegistration
 
 class BackgroundFetchUpdateUIEvent(BackgroundFetchEvent):
-    def New(self, type: str, init: BackgroundFetchEventInit) -> BackgroundFetchUpdateUIEvent: ...
+    @classmethod
+    def new(self, type: str, init: BackgroundFetchEventInit) -> BackgroundFetchUpdateUIEvent: ...
     def updateUI(self, options: BackgroundFetchUIOptions | None = {}) -> Awaitable[None]: ...
 
 class SyncManager:
@@ -2737,7 +2757,8 @@ class SyncManager:
     def getTags(self) -> Awaitable[Sequence[str]]: ...
 
 class SyncEvent(ExtendableEvent):
-    def New(self, type: str, init: SyncEventInit) -> SyncEvent: ...
+    @classmethod
+    def new(self, type: str, init: SyncEventInit) -> SyncEvent: ...
     tag: str
     lastChance: bool
 
@@ -2804,11 +2825,13 @@ class ClipboardEventInit(TypedDict, EventInit):
     clipboardData: NotRequired[DataTransfer | None]
 
 class ClipboardEvent(Event):
-    def New(self, type: str, eventInitDict: ClipboardEventInit | None = {}) -> ClipboardEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: ClipboardEventInit | None = {}) -> ClipboardEvent: ...
     clipboardData: DataTransfer | None
 
 class ClipboardItem:
-    def New(self, items: ClipboardItemData, options: ClipboardItemOptions | None = {}) -> ClipboardItem: ...
+    @classmethod
+    def new(self, items: ClipboardItemData, options: ClipboardItemOptions | None = {}) -> ClipboardItem: ...
     presentationStyle: PresentationStyle
     types: Sequence[str]
     def getType(self, type: str) -> Awaitable[Blob]: ...
@@ -2826,7 +2849,8 @@ class ClipboardPermissionDescriptor(TypedDict, PermissionDescriptor):
     allowWithoutGesture: NotRequired[bool]
 
 class CloseWatcher(EventTarget):
-    def New(self, options: CloseWatcherOptions | None = {}) -> CloseWatcher: ...
+    @classmethod
+    def new(self, options: CloseWatcherOptions | None = {}) -> CloseWatcher: ...
     def destroy(self): ...
     def close(self): ...
     oncancel: EventHandler
@@ -2938,7 +2962,8 @@ class Window(EventTarget, GlobalEventHandlers, WindowEventHandlers, WindowOrWork
     def getScreenDetails(self) -> Awaitable[ScreenDetails]: ...
 
 class HTMLBodyElement(HTMLElement, WindowEventHandlers):
-    def New(self) -> HTMLBodyElement: ...
+    @classmethod
+    def new(self) -> HTMLBodyElement: ...
     onorientationchange: EventHandler
     text: str
     link: str
@@ -2948,13 +2973,16 @@ class HTMLBodyElement(HTMLElement, WindowEventHandlers):
     background: str
 
 class CompressionStream(GenericTransformStream):
-    def New(self, format: str) -> CompressionStream: ...
+    @classmethod
+    def new(self, format: str) -> CompressionStream: ...
 
 class DecompressionStream(GenericTransformStream):
-    def New(self, format: str) -> DecompressionStream: ...
+    @classmethod
+    def new(self, format: str) -> DecompressionStream: ...
 
 class PressureObserver:
-    def New(self, callback: PressureUpdateCallback, options: PressureObserverOptions | None = {}) -> PressureObserver: ...
+    @classmethod
+    def new(self, callback: PressureUpdateCallback, options: PressureObserverOptions | None = {}) -> PressureObserver: ...
     def observe(self, source: PressureSource) -> Awaitable[None]: ...
     def unobserve(self, source: PressureSource): ...
     def disconnect(self): ...
@@ -3034,7 +3062,8 @@ class ContentIndexEventInit(TypedDict, ExtendableEventInit):
     id: str
 
 class ContentIndexEvent(ExtendableEvent):
-    def New(self, type: str, init: ContentIndexEventInit) -> ContentIndexEvent: ...
+    @classmethod
+    def new(self, type: str, init: ContentIndexEventInit) -> ContentIndexEvent: ...
     id: str
 
 class CookieStore(EventTarget):
@@ -3088,7 +3117,8 @@ class CookieStoreManager:
     def unsubscribe(self, subscriptions: Sequence[CookieStoreGetOptions]) -> Awaitable[None]: ...
 
 class CookieChangeEvent(Event):
-    def New(self, type: str, eventInitDict: CookieChangeEventInit | None = {}) -> CookieChangeEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: CookieChangeEventInit | None = {}) -> CookieChangeEvent: ...
     changed: Sequence[CookieListItem]
     deleted: Sequence[CookieListItem]
 
@@ -3097,7 +3127,8 @@ class CookieChangeEventInit(TypedDict, EventInit):
     deleted: NotRequired[CookieList]
 
 class ExtendableCookieChangeEvent(ExtendableEvent):
-    def New(self, type: str, eventInitDict: ExtendableCookieChangeEventInit | None = {}) -> ExtendableCookieChangeEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: ExtendableCookieChangeEventInit | None = {}) -> ExtendableCookieChangeEvent: ...
     changed: Sequence[CookieListItem]
     deleted: Sequence[CookieListItem]
 
@@ -3134,9 +3165,11 @@ class CredentialCreationOptions(TypedDict, TypedDict, TypedDict, TypedDict):
 
 class PasswordCredential(Credential, CredentialUserData):
     @overload
-    def New(self, form: HTMLFormElement) -> PasswordCredential: ...
+    @classmethod
+    def new(self, form: HTMLFormElement) -> PasswordCredential: ...
     @overload
-    def New(self, data: PasswordCredentialData) -> PasswordCredential: ...
+    @classmethod
+    def new(self, data: PasswordCredentialData) -> PasswordCredential: ...
     password: USVString
 
 class PasswordCredentialData(TypedDict, CredentialData):
@@ -3146,7 +3179,8 @@ class PasswordCredentialData(TypedDict, CredentialData):
     password: USVString
 
 class FederatedCredential(Credential, CredentialUserData):
-    def New(self, data: FederatedCredentialInit) -> FederatedCredential: ...
+    @classmethod
+    def new(self, data: FederatedCredentialInit) -> FederatedCredential: ...
     provider: USVString
     protocol: str | None
 
@@ -3162,7 +3196,8 @@ class FederatedCredentialInit(TypedDict, CredentialData):
     protocol: NotRequired[str]
 
 class HTMLIFrameElement(HTMLElement):
-    def New(self) -> HTMLIFrameElement: ...
+    @classmethod
+    def new(self) -> HTMLIFrameElement: ...
     csp: str
     src: USVString
     srcdoc: str
@@ -3203,7 +3238,8 @@ class WorkletAnimationEffect:
     localTime: float | None
 
 class WorkletAnimation(Animation):
-    def New(self, animatorName: str, effects: AnimationEffect | Sequence[AnimationEffect] | None = None, timeline: AnimationTimeline | None = None, options: Any | None = None) -> WorkletAnimation: ...
+    @classmethod
+    def new(self, animatorName: str, effects: AnimationEffect | Sequence[AnimationEffect] | None = None, timeline: AnimationTimeline | None = None, options: Any | None = None) -> WorkletAnimation: ...
     animatorName: str
 
 class WorkletGroupEffect:
@@ -3213,7 +3249,8 @@ class CSSAnimation(Animation):
     animationName: CSSOMString
 
 class AnimationEvent(Event):
-    def New(self, type: CSSOMString, animationEventInitDict: AnimationEventInit | None = {}) -> AnimationEvent: ...
+    @classmethod
+    def new(self, type: CSSOMString, animationEventInitDict: AnimationEventInit | None = {}) -> AnimationEvent: ...
     animationName: CSSOMString
     elapsedTime: float
     pseudoElement: CSSOMString
@@ -3461,7 +3498,8 @@ class CSSContainerRule(CSSConditionRule):
     containerQuery: CSSOMString
 
 class ContentVisibilityAutoStateChangedEvent(Event):
-    def New(self, type: str, eventInitDict: ContentVisibilityAutoStateChangedEventInit | None = {}) -> ContentVisibilityAutoStateChangedEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: ContentVisibilityAutoStateChangedEventInit | None = {}) -> ContentVisibilityAutoStateChangedEvent: ...
     skipped: bool
 
 class ContentVisibilityAutoStateChangedEventInit(TypedDict, EventInit):
@@ -3494,7 +3532,8 @@ class FontFaceDescriptors(TypedDict):
     lineGapOverride: NotRequired[CSSOMString]
 
 class FontFace:
-    def New(self, family: CSSOMString, source: CSSOMString | BinaryData, descriptors: FontFaceDescriptors | None = {}) -> FontFace: ...
+    @classmethod
+    def new(self, family: CSSOMString, source: CSSOMString | BinaryData, descriptors: FontFaceDescriptors | None = {}) -> FontFace: ...
     family: CSSOMString
     style: CSSOMString
     weight: CSSOMString
@@ -3537,11 +3576,13 @@ class FontFaceSetLoadEventInit(TypedDict, EventInit):
     fontfaces: NotRequired[Sequence[FontFace]]
 
 class FontFaceSetLoadEvent(Event):
-    def New(self, type: CSSOMString, eventInitDict: FontFaceSetLoadEventInit | None = {}) -> FontFaceSetLoadEvent: ...
+    @classmethod
+    def new(self, type: CSSOMString, eventInitDict: FontFaceSetLoadEventInit | None = {}) -> FontFaceSetLoadEvent: ...
     fontfaces: Sequence[FontFace]
 
 class FontFaceSet(EventTarget):
-    def New(self, initialFaces: Sequence[FontFace]) -> FontFaceSet: ...
+    @classmethod
+    def new(self, initialFaces: Sequence[FontFace]) -> FontFaceSet: ...
     def add(self, font: FontFace) -> FontFaceSet: ...
     def delete(self, font: FontFace) -> bool: ...
     def clear(self): ...
@@ -3590,7 +3631,8 @@ class CSSFontPaletteValuesRule(CSSRule):
     overrideColors: CSSOMString
 
 class Highlight:
-    def New(self, *initialRanges: AbstractRange) -> Highlight: ...
+    @classmethod
+    def new(self, *initialRanges: AbstractRange) -> Highlight: ...
     priority: int
     type: HighlightType
 
@@ -3671,7 +3713,8 @@ class FragmentResultOptions(TypedDict):
     breakToken: NotRequired[BreakTokenOptions]
 
 class FragmentResult:
-    def New(self, options: FragmentResultOptions | None = {}) -> FragmentResult: ...
+    @classmethod
+    def new(self, options: FragmentResultOptions | None = {}) -> FragmentResult: ...
     inlineSize: float
     blockSize: float
 
@@ -3699,7 +3742,8 @@ class SpatialNavigationSearchOptions(TypedDict):
     container: NotRequired[Node | None]
 
 class NavigationEvent(UIEvent):
-    def New(self, type: str, eventInitDict: NavigationEventInit | None = {}) -> NavigationEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: NavigationEventInit | None = {}) -> NavigationEvent: ...
     dir: SpatialNavigationDirection
     relatedTarget: EventTarget | None
 
@@ -3734,30 +3778,35 @@ class CSSParserOptions(TypedDict):
 class CSSParserRule: ...
 
 class CSSParserAtRule(CSSParserRule):
-    def New(self, name: str, prelude: Sequence[CSSToken], body: Sequence[CSSParserRule] | None = None) -> CSSParserAtRule: ...
+    @classmethod
+    def new(self, name: str, prelude: Sequence[CSSToken], body: Sequence[CSSParserRule] | None = None) -> CSSParserAtRule: ...
     name: str
     prelude: Sequence[CSSParserValue]
     body: Sequence[CSSParserRule]
 
 class CSSParserQualifiedRule(CSSParserRule):
-    def New(self, prelude: Sequence[CSSToken], body: Sequence[CSSParserRule] | None = None) -> CSSParserQualifiedRule: ...
+    @classmethod
+    def new(self, prelude: Sequence[CSSToken], body: Sequence[CSSParserRule] | None = None) -> CSSParserQualifiedRule: ...
     prelude: Sequence[CSSParserValue]
     body: Sequence[CSSParserRule]
 
 class CSSParserDeclaration(CSSParserRule):
-    def New(self, name: str, body: Sequence[CSSParserRule] | None = None) -> CSSParserDeclaration: ...
+    @classmethod
+    def new(self, name: str, body: Sequence[CSSParserRule] | None = None) -> CSSParserDeclaration: ...
     name: str
     body: Sequence[CSSParserValue]
 
 class CSSParserValue: ...
 
 class CSSParserBlock(CSSParserValue):
-    def New(self, name: str, body: Sequence[CSSParserValue]) -> CSSParserBlock: ...
+    @classmethod
+    def new(self, name: str, body: Sequence[CSSParserValue]) -> CSSParserBlock: ...
     name: str
     body: Sequence[CSSParserValue]
 
 class CSSParserFunction(CSSParserValue):
-    def New(self, name: str, args: Sequence[Sequence[CSSParserValue]]) -> CSSParserFunction: ...
+    @classmethod
+    def new(self, name: str, args: Sequence[Sequence[CSSParserValue]]) -> CSSParserFunction: ...
     name: str
     args: Sequence[Sequence[CSSParserValue]]
 
@@ -3797,7 +3846,8 @@ class CSSTransition(Animation):
     transitionProperty: CSSOMString
 
 class TransitionEvent(Event):
-    def New(self, type: CSSOMString, transitionEventInitDict: TransitionEventInit | None = {}) -> TransitionEvent: ...
+    @classmethod
+    def new(self, type: CSSOMString, transitionEventInitDict: TransitionEventInit | None = {}) -> TransitionEvent: ...
     propertyName: CSSOMString
     elapsedTime: float
     pseudoElement: CSSOMString
@@ -3826,16 +3876,19 @@ class ElementCSSInlineStyle:
     style: CSSStyleDeclaration
 
 class CSSUnparsedValue(CSSStyleValue):
-    def New(self, members: Sequence[CSSUnparsedSegment]) -> CSSUnparsedValue: ...
+    @classmethod
+    def new(self, members: Sequence[CSSUnparsedSegment]) -> CSSUnparsedValue: ...
     length: int
 
 class CSSVariableReferenceValue:
-    def New(self, variable: USVString, fallback: CSSUnparsedValue | None = None) -> CSSVariableReferenceValue: ...
+    @classmethod
+    def new(self, variable: USVString, fallback: CSSUnparsedValue | None = None) -> CSSVariableReferenceValue: ...
     variable: USVString
     fallback: CSSUnparsedValue | None
 
 class CSSKeywordValue(CSSStyleValue):
-    def New(self, value: USVString) -> CSSKeywordValue: ...
+    @classmethod
+    def new(self, value: USVString) -> CSSKeywordValue: ...
     value: USVString
 
 class CSSNumericType(TypedDict):
@@ -3861,7 +3914,8 @@ class CSSNumericValue(CSSStyleValue):
     def type(self) -> CSSNumericType: ...
 
 class CSSUnitValue(CSSNumericValue):
-    def New(self, value: float, unit: USVString) -> CSSUnitValue: ...
+    @classmethod
+    def new(self, value: float, unit: USVString) -> CSSUnitValue: ...
     value: float
     unit: USVString
 
@@ -3869,31 +3923,38 @@ class CSSMathValue(CSSNumericValue):
     operator: CSSMathOperator
 
 class CSSMathSum(CSSMathValue):
-    def New(self, *args: CSSNumberish) -> CSSMathSum: ...
+    @classmethod
+    def new(self, *args: CSSNumberish) -> CSSMathSum: ...
     values: CSSNumericArray
 
 class CSSMathProduct(CSSMathValue):
-    def New(self, *args: CSSNumberish) -> CSSMathProduct: ...
+    @classmethod
+    def new(self, *args: CSSNumberish) -> CSSMathProduct: ...
     values: CSSNumericArray
 
 class CSSMathNegate(CSSMathValue):
-    def New(self, arg: CSSNumberish) -> CSSMathNegate: ...
+    @classmethod
+    def new(self, arg: CSSNumberish) -> CSSMathNegate: ...
     value: CSSNumericValue
 
 class CSSMathInvert(CSSMathValue):
-    def New(self, arg: CSSNumberish) -> CSSMathInvert: ...
+    @classmethod
+    def new(self, arg: CSSNumberish) -> CSSMathInvert: ...
     value: CSSNumericValue
 
 class CSSMathMin(CSSMathValue):
-    def New(self, *args: CSSNumberish) -> CSSMathMin: ...
+    @classmethod
+    def new(self, *args: CSSNumberish) -> CSSMathMin: ...
     values: CSSNumericArray
 
 class CSSMathMax(CSSMathValue):
-    def New(self, *args: CSSNumberish) -> CSSMathMax: ...
+    @classmethod
+    def new(self, *args: CSSNumberish) -> CSSMathMax: ...
     values: CSSNumericArray
 
 class CSSMathClamp(CSSMathValue):
-    def New(self, lower: CSSNumberish, value: CSSNumberish, upper: CSSNumberish) -> CSSMathClamp: ...
+    @classmethod
+    def new(self, lower: CSSNumberish, value: CSSNumberish, upper: CSSNumberish) -> CSSMathClamp: ...
     lower: CSSNumericValue
     value: CSSNumericValue
     upper: CSSNumericValue
@@ -3902,7 +3963,8 @@ class CSSNumericArray:
     length: int
 
 class CSSTransformValue(CSSStyleValue):
-    def New(self, transforms: Sequence[CSSTransformComponent]) -> CSSTransformValue: ...
+    @classmethod
+    def new(self, transforms: Sequence[CSSTransformComponent]) -> CSSTransformValue: ...
     length: int
     is2D: bool
     def toMatrix(self) -> DOMMatrix: ...
@@ -3912,46 +3974,55 @@ class CSSTransformComponent:
     def toMatrix(self) -> DOMMatrix: ...
 
 class CSSTranslate(CSSTransformComponent):
-    def New(self, x: CSSNumericValue, y: CSSNumericValue, z: CSSNumericValue | None = None) -> CSSTranslate: ...
+    @classmethod
+    def new(self, x: CSSNumericValue, y: CSSNumericValue, z: CSSNumericValue | None = None) -> CSSTranslate: ...
     x: CSSNumericValue
     y: CSSNumericValue
     z: CSSNumericValue
 
 class CSSRotate(CSSTransformComponent):
     @overload
-    def New(self, angle: CSSNumericValue) -> CSSRotate: ...
+    @classmethod
+    def new(self, angle: CSSNumericValue) -> CSSRotate: ...
     @overload
-    def New(self, x: CSSNumberish, y: CSSNumberish, z: CSSNumberish, angle: CSSNumericValue) -> CSSRotate: ...
+    @classmethod
+    def new(self, x: CSSNumberish, y: CSSNumberish, z: CSSNumberish, angle: CSSNumericValue) -> CSSRotate: ...
     x: CSSNumberish
     y: CSSNumberish
     z: CSSNumberish
     angle: CSSNumericValue
 
 class CSSScale(CSSTransformComponent):
-    def New(self, x: CSSNumberish, y: CSSNumberish, z: CSSNumberish | None = None) -> CSSScale: ...
+    @classmethod
+    def new(self, x: CSSNumberish, y: CSSNumberish, z: CSSNumberish | None = None) -> CSSScale: ...
     x: CSSNumberish
     y: CSSNumberish
     z: CSSNumberish
 
 class CSSSkew(CSSTransformComponent):
-    def New(self, ax: CSSNumericValue, ay: CSSNumericValue) -> CSSSkew: ...
+    @classmethod
+    def new(self, ax: CSSNumericValue, ay: CSSNumericValue) -> CSSSkew: ...
     ax: CSSNumericValue
     ay: CSSNumericValue
 
 class CSSSkewX(CSSTransformComponent):
-    def New(self, ax: CSSNumericValue) -> CSSSkewX: ...
+    @classmethod
+    def new(self, ax: CSSNumericValue) -> CSSSkewX: ...
     ax: CSSNumericValue
 
 class CSSSkewY(CSSTransformComponent):
-    def New(self, ay: CSSNumericValue) -> CSSSkewY: ...
+    @classmethod
+    def new(self, ay: CSSNumericValue) -> CSSSkewY: ...
     ay: CSSNumericValue
 
 class CSSPerspective(CSSTransformComponent):
-    def New(self, length: CSSPerspectiveValue) -> CSSPerspective: ...
+    @classmethod
+    def new(self, length: CSSPerspectiveValue) -> CSSPerspective: ...
     length: CSSPerspectiveValue
 
 class CSSMatrixComponent(CSSTransformComponent):
-    def New(self, matrix: DOMMatrixReadOnly, options: CSSMatrixComponentOptions | None = {}) -> CSSMatrixComponent: ...
+    @classmethod
+    def new(self, matrix: DOMMatrixReadOnly, options: CSSMatrixComponentOptions | None = {}) -> CSSMatrixComponent: ...
     matrix: DOMMatrix
 
 class CSSMatrixComponentOptions(TypedDict):
@@ -3962,56 +4033,64 @@ class CSSImageValue(CSSStyleValue): ...
 class CSSColorValue(CSSStyleValue): ...
 
 class CSSRGB(CSSColorValue):
-    def New(self, r: CSSColorRGBComp, g: CSSColorRGBComp, b: CSSColorRGBComp, alpha: CSSColorPercent | None = 1) -> CSSRGB: ...
+    @classmethod
+    def new(self, r: CSSColorRGBComp, g: CSSColorRGBComp, b: CSSColorRGBComp, alpha: CSSColorPercent | None = 1) -> CSSRGB: ...
     r: CSSColorRGBComp
     g: CSSColorRGBComp
     b: CSSColorRGBComp
     alpha: CSSColorPercent
 
 class CSSHSL(CSSColorValue):
-    def New(self, h: CSSColorAngle, s: CSSColorPercent, l: CSSColorPercent, alpha: CSSColorPercent | None = 1) -> CSSHSL: ...
+    @classmethod
+    def new(self, h: CSSColorAngle, s: CSSColorPercent, l: CSSColorPercent, alpha: CSSColorPercent | None = 1) -> CSSHSL: ...
     h: CSSColorAngle
     s: CSSColorPercent
     l: CSSColorPercent
     alpha: CSSColorPercent
 
 class CSSHWB(CSSColorValue):
-    def New(self, h: CSSNumericValue, w: CSSNumberish, b: CSSNumberish, alpha: CSSNumberish | None = 1) -> CSSHWB: ...
+    @classmethod
+    def new(self, h: CSSNumericValue, w: CSSNumberish, b: CSSNumberish, alpha: CSSNumberish | None = 1) -> CSSHWB: ...
     h: CSSNumericValue
     w: CSSNumberish
     b: CSSNumberish
     alpha: CSSNumberish
 
 class CSSLab(CSSColorValue):
-    def New(self, l: CSSColorPercent, a: CSSColorNumber, b: CSSColorNumber, alpha: CSSColorPercent | None = 1) -> CSSLab: ...
+    @classmethod
+    def new(self, l: CSSColorPercent, a: CSSColorNumber, b: CSSColorNumber, alpha: CSSColorPercent | None = 1) -> CSSLab: ...
     l: CSSColorPercent
     a: CSSColorNumber
     b: CSSColorNumber
     alpha: CSSColorPercent
 
 class CSSLCH(CSSColorValue):
-    def New(self, l: CSSColorPercent, c: CSSColorPercent, h: CSSColorAngle, alpha: CSSColorPercent | None = 1) -> CSSLCH: ...
+    @classmethod
+    def new(self, l: CSSColorPercent, c: CSSColorPercent, h: CSSColorAngle, alpha: CSSColorPercent | None = 1) -> CSSLCH: ...
     l: CSSColorPercent
     c: CSSColorPercent
     h: CSSColorAngle
     alpha: CSSColorPercent
 
 class CSSOKLab(CSSColorValue):
-    def New(self, l: CSSColorPercent, a: CSSColorNumber, b: CSSColorNumber, alpha: CSSColorPercent | None = 1) -> CSSOKLab: ...
+    @classmethod
+    def new(self, l: CSSColorPercent, a: CSSColorNumber, b: CSSColorNumber, alpha: CSSColorPercent | None = 1) -> CSSOKLab: ...
     l: CSSColorPercent
     a: CSSColorNumber
     b: CSSColorNumber
     alpha: CSSColorPercent
 
 class CSSOKLCH(CSSColorValue):
-    def New(self, l: CSSColorPercent, c: CSSColorPercent, h: CSSColorAngle, alpha: CSSColorPercent | None = 1) -> CSSOKLCH: ...
+    @classmethod
+    def new(self, l: CSSColorPercent, c: CSSColorPercent, h: CSSColorAngle, alpha: CSSColorPercent | None = 1) -> CSSOKLCH: ...
     l: CSSColorPercent
     c: CSSColorPercent
     h: CSSColorAngle
     alpha: CSSColorPercent
 
 class CSSColor(CSSColorValue):
-    def New(self, colorSpace: CSSKeywordish, channels: Sequence[CSSColorPercent], alpha: CSSNumberish | None = 1) -> CSSColor: ...
+    @classmethod
+    def new(self, colorSpace: CSSKeywordish, channels: Sequence[CSSColorPercent], alpha: CSSNumberish | None = 1) -> CSSColor: ...
     colorSpace: CSSKeywordish
     channels: Sequence[CSSColorPercent]
     alpha: CSSNumberish
@@ -4037,7 +4116,8 @@ class MediaQueryList(EventTarget):
     onchange: EventHandler
 
 class MediaQueryListEvent(Event):
-    def New(self, type: CSSOMString, eventInitDict: MediaQueryListEventInit | None = {}) -> MediaQueryListEvent: ...
+    @classmethod
+    def new(self, type: CSSOMString, eventInitDict: MediaQueryListEventInit | None = {}) -> MediaQueryListEvent: ...
     media: CSSOMString
     matches: bool
 
@@ -4070,7 +4150,8 @@ class CheckVisibilityOptions(TypedDict):
     checkVisibilityCSS: NotRequired[bool]
 
 class HTMLElement(Element, ElementCSSInlineStyle, GlobalEventHandlers, ElementContentEditable, HTMLOrSVGElement):
-    def New(self) -> HTMLElement: ...
+    @classmethod
+    def new(self) -> HTMLElement: ...
     offsetParent: Element | None
     offsetTop: int
     offsetLeft: int
@@ -4093,7 +4174,8 @@ class HTMLElement(Element, ElementCSSInlineStyle, GlobalEventHandlers, ElementCo
     def attachInternals(self) -> ElementInternals: ...
 
 class MouseEvent(UIEvent):
-    def New(self, type: str, eventInitDict: MouseEventInit | None = {}) -> MouseEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: MouseEventInit | None = {}) -> MouseEvent: ...
     pageX: float
     pageY: float
     x: float
@@ -4131,7 +4213,8 @@ class GeometryUtils:
     def convertPointFromNode(self, point: DOMPointInit, from_: GeometryNode, options: ConvertCoordinateOptions | None = {}) -> DOMPoint: ...
 
 class Text(CharacterData, GeometryUtils, Slottable):
-    def New(self, data: str | None = "") -> Text: ...
+    @classmethod
+    def new(self, data: str | None = "") -> Text: ...
     def splitText(self, offset: int) -> Text: ...
     wholeText: str
 
@@ -4163,7 +4246,8 @@ class StyleSheet:
     disabled: bool
 
 class CSSStyleSheet(StyleSheet):
-    def New(self, options: CSSStyleSheetInit | None = {}) -> CSSStyleSheet: ...
+    @classmethod
+    def new(self, options: CSSStyleSheetInit | None = {}) -> CSSStyleSheet: ...
     ownerRule: CSSRule | None
     cssRules: CSSRuleList
     def insertRule(self, rule: CSSOMString, index: int | None = 0) -> int: ...
@@ -4682,7 +4766,8 @@ class CustomStateSet:
     def add(self, value: str): ...
 
 class DataCue(TextTrackCue):
-    def New(self, startTime: float, endTime: float, value: Any, type: str | None = None) -> DataCue: ...
+    @classmethod
+    def new(self, startTime: float, endTime: float, value: Any, type: str | None = None) -> DataCue: ...
     value: Any
     type: str
 
@@ -4726,7 +4811,8 @@ class PurchaseDetails(TypedDict):
     purchaseToken: str
 
 class Event:
-    def New(self, type: str, eventInitDict: EventInit | None = {}) -> Event: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: EventInit | None = {}) -> Event: ...
     type: str
     target: EventTarget | None
     srcElement: EventTarget | None
@@ -4756,7 +4842,8 @@ class EventInit(TypedDict):
     composed: NotRequired[bool]
 
 class CustomEvent(Event):
-    def New(self, type: str, eventInitDict: CustomEventInit | None = {}) -> CustomEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: CustomEventInit | None = {}) -> CustomEvent: ...
     detail: Any
     def initCustomEvent(self, type: str, bubbles: bool | None = false, cancelable: bool | None = false, detail: Any | None = None): ...
 
@@ -4764,7 +4851,8 @@ class CustomEventInit(TypedDict, EventInit):
     detail: NotRequired[Any]
 
 class EventTarget:
-    def New(self) -> EventTarget: ...
+    @classmethod
+    def new(self) -> EventTarget: ...
     def addEventListener(self, type: str, callback: EventListener | None, options: AddEventListenerOptions | bool | None = {}): ...
     def removeEventListener(self, type: str, callback: EventListener | None, options: EventListenerOptions | bool | None = {}): ...
     def dispatchEvent(self, event: Event) -> bool: ...
@@ -4778,7 +4866,8 @@ class AddEventListenerOptions(TypedDict, EventListenerOptions):
     signal: NotRequired[AbortSignal]
 
 class AbortController:
-    def New(self) -> AbortController: ...
+    @classmethod
+    def new(self) -> AbortController: ...
     signal: AbortSignal
     def abort(self, reason: Any | None = None): ...
 
@@ -4792,7 +4881,8 @@ class NonElementParentNode:
     def getElementById(self, elementId: str) -> Element | None: ...
 
 class DocumentFragment(Node, NonElementParentNode, ParentNode):
-    def New(self) -> DocumentFragment: ...
+    @classmethod
+    def new(self) -> DocumentFragment: ...
 
 class ParentNode:
     children: HTMLCollection
@@ -4839,7 +4929,8 @@ class HTMLCollection:
     length: int
 
 class MutationObserver:
-    def New(self, callback: MutationCallback) -> MutationObserver: ...
+    @classmethod
+    def new(self, callback: MutationCallback) -> MutationObserver: ...
     def observe(self, target: Node, options: MutationObserverInit | None = {}): ...
     def disconnect(self): ...
     def takeRecords(self) -> Sequence[MutationRecord]: ...
@@ -4951,7 +5042,8 @@ class Attr(Node):
 class CDATASection(Text): ...
 
 class Comment(CharacterData):
-    def New(self, data: str | None = "") -> Comment: ...
+    @classmethod
+    def new(self, data: str | None = "") -> Comment: ...
 
 class AbstractRange:
     startContainer: Node
@@ -4967,7 +5059,8 @@ class StaticRangeInit(TypedDict):
     endOffset: int
 
 class StaticRange(AbstractRange):
-    def New(self, init: StaticRangeInit) -> StaticRange: ...
+    @classmethod
+    def new(self, init: StaticRangeInit) -> StaticRange: ...
 
 class NodeIterator:
     root: Node
@@ -5032,10 +5125,12 @@ class XPathEvaluatorBase:
     def evaluate(self, expression: str, contextNode: Node, resolver: XPathNSResolver | None = None, type: int | None = 0, result: XPathResult | None = None) -> XPathResult: ...
 
 class XPathEvaluator(XPathEvaluatorBase):
-    def New(self) -> XPathEvaluator: ...
+    @classmethod
+    def new(self) -> XPathEvaluator: ...
 
 class XSLTProcessor:
-    def New(self) -> XSLTProcessor: ...
+    @classmethod
+    def new(self) -> XSLTProcessor: ...
     def importStylesheet(self, style: Node): ...
     def transformToFragment(self, source: Node, output: Document) -> DocumentFragment: ...
     def transformToDocument(self, source: Node) -> Document: ...
@@ -5051,7 +5146,8 @@ class EditContextInit(TypedDict):
     selectionEnd: NotRequired[int]
 
 class EditContext(EventTarget):
-    def New(self, options: EditContextInit | None = {}) -> EditContext: ...
+    @classmethod
+    def new(self, options: EditContextInit | None = {}) -> EditContext: ...
     def updateText(self, rangeStart: int, rangeEnd: int, text: str): ...
     def updateSelection(self, start: int, end: int): ...
     def updateControlBound(self, controlBound: DOMRect): ...
@@ -5084,7 +5180,8 @@ class TextUpdateEventInit(TypedDict):
     compositionEnd: NotRequired[int]
 
 class TextUpdateEvent(Event):
-    def New(self, options: TextUpdateEventInit | None = {}) -> TextUpdateEvent: ...
+    @classmethod
+    def new(self, options: TextUpdateEventInit | None = {}) -> TextUpdateEvent: ...
     updateRangeStart: int
     updateRangeEnd: int
     text: str
@@ -5103,7 +5200,8 @@ class TextFormatInit(TypedDict):
     underlineColor: NotRequired[str]
 
 class TextFormat:
-    def New(self, options: TextFormatInit | None = {}) -> TextFormat: ...
+    @classmethod
+    def new(self, options: TextFormatInit | None = {}) -> TextFormat: ...
     rangeStart: int
     rangeEnd: int
     textColor: str
@@ -5116,7 +5214,8 @@ class TextFormatUpdateEventInit(TypedDict):
     textFormats: NotRequired[Sequence[TextFormat]]
 
 class TextFormatUpdateEvent(Event):
-    def New(self, options: TextFormatUpdateEventInit | None = {}) -> TextFormatUpdateEvent: ...
+    @classmethod
+    def new(self, options: TextFormatUpdateEventInit | None = {}) -> TextFormatUpdateEvent: ...
     def getTextFormats(self) -> Sequence[TextFormat]: ...
 
 class CharacterBoundsUpdateEventInit(TypedDict):
@@ -5124,7 +5223,8 @@ class CharacterBoundsUpdateEventInit(TypedDict):
     rangeEnd: NotRequired[int]
 
 class CharacterBoundsUpdateEvent(Event):
-    def New(self, options: CharacterBoundsUpdateEventInit | None = {}) -> CharacterBoundsUpdateEvent: ...
+    @classmethod
+    def new(self, options: CharacterBoundsUpdateEventInit | None = {}) -> CharacterBoundsUpdateEvent: ...
     rangeStart: int
     rangeEnd: int
 
@@ -5153,7 +5253,8 @@ class TextDecodeOptions(TypedDict):
     stream: NotRequired[bool]
 
 class TextDecoder(TextDecoderCommon):
-    def New(self, label: str | None = "utf-8", options: TextDecoderOptions | None = {}) -> TextDecoder: ...
+    @classmethod
+    def new(self, label: str | None = "utf-8", options: TextDecoderOptions | None = {}) -> TextDecoder: ...
     def decode(self, input: BufferSource | None = None, options: TextDecodeOptions | None = {}) -> USVString: ...
 
 class TextEncoderCommon:
@@ -5164,15 +5265,18 @@ class TextEncoderEncodeIntoResult(TypedDict):
     written: NotRequired[int]
 
 class TextEncoder(TextEncoderCommon):
-    def New(self) -> TextEncoder: ...
+    @classmethod
+    def new(self) -> TextEncoder: ...
     def encode(self, input: USVString | None = "") -> Uint8Array: ...
     def encodeInto(self, source: USVString, destination: Uint8Array) -> TextEncoderEncodeIntoResult: ...
 
 class TextDecoderStream(TextDecoderCommon, GenericTransformStream):
-    def New(self, label: str | None = "utf-8", options: TextDecoderOptions | None = {}) -> TextDecoderStream: ...
+    @classmethod
+    def new(self, label: str | None = "utf-8", options: TextDecoderOptions | None = {}) -> TextDecoderStream: ...
 
 class TextEncoderStream(TextEncoderCommon, GenericTransformStream):
-    def New(self) -> TextEncoderStream: ...
+    @classmethod
+    def new(self) -> TextEncoderStream: ...
 
 class MediaKeySystemConfiguration(TypedDict):
     label: NotRequired[str]
@@ -5216,7 +5320,8 @@ class MediaKeyStatusMap:
     def get(self, keyId: BufferSource) -> MediaKeyStatus | None: ...
 
 class MediaKeyMessageEvent(Event):
-    def New(self, type: str, eventInitDict: MediaKeyMessageEventInit) -> MediaKeyMessageEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: MediaKeyMessageEventInit) -> MediaKeyMessageEvent: ...
     messageType: MediaKeyMessageType
     message: ArrayBuffer
 
@@ -5225,7 +5330,8 @@ class MediaKeyMessageEventInit(TypedDict, EventInit):
     message: ArrayBuffer
 
 class MediaEncryptedEvent(Event):
-    def New(self, type: str, eventInitDict: MediaEncryptedEventInit | None = {}) -> MediaEncryptedEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: MediaEncryptedEventInit | None = {}) -> MediaEncryptedEvent: ...
     initDataType: str
     initData: ArrayBuffer
 
@@ -5234,7 +5340,8 @@ class MediaEncryptedEventInit(TypedDict, EventInit):
     initData: NotRequired[ArrayBuffer]
 
 class HTMLInputElement(HTMLElement):
-    def New(self) -> HTMLInputElement: ...
+    @classmethod
+    def new(self) -> HTMLInputElement: ...
     webkitdirectory: bool
     webkitEntries: Sequence[FileSystemEntry]
     capture: str
@@ -5377,11 +5484,13 @@ class ColorSelectionOptions(TypedDict):
     signal: NotRequired[AbortSignal]
 
 class EyeDropper:
-    def New(self) -> EyeDropper: ...
+    @classmethod
+    def new(self) -> EyeDropper: ...
     def open(self, options: ColorSelectionOptions | None = {}) -> Awaitable[ColorSelectionResult]: ...
 
 class Headers:
-    def New(self, init: HeadersInit | None = None) -> Headers: ...
+    @classmethod
+    def new(self, init: HeadersInit | None = None) -> Headers: ...
     def append(self, name: ByteString, value: ByteString): ...
     def delete(self, name: ByteString): ...
     def get(self, name: ByteString) -> ByteString | None: ...
@@ -5398,7 +5507,8 @@ class Body:
     def text(self) -> Awaitable[USVString]: ...
 
 class Request(Body):
-    def New(self, input: RequestInfo, init: RequestInit | None = {}) -> Request: ...
+    @classmethod
+    def new(self, input: RequestInfo, init: RequestInit | None = {}) -> Request: ...
     method: ByteString
     url: USVString
     headers: Headers
@@ -5435,7 +5545,8 @@ class RequestInit(TypedDict):
     window: NotRequired[Any]
 
 class Response(Body):
-    def New(self, body: BodyInit | None = None, init: ResponseInit | None = {}) -> Response: ...
+    @classmethod
+    def new(self, body: BodyInit | None = None, init: ResponseInit | None = {}) -> Response: ...
     type: ResponseType
     url: USVString
     redirected: bool
@@ -5863,7 +5974,8 @@ class GamepadButton:
     value: float
 
 class GamepadEvent(Event):
-    def New(self, type: str, eventInitDict: GamepadEventInit) -> GamepadEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: GamepadEventInit) -> GamepadEvent: ...
     gamepad: Gamepad
 
 class GamepadEventInit(TypedDict, EventInit):
@@ -5904,7 +6016,8 @@ class SensorOptions(TypedDict):
     frequency: NotRequired[float]
 
 class SensorErrorEvent(Event):
-    def New(self, type: str, errorEventInitDict: SensorErrorEventInit) -> SensorErrorEvent: ...
+    @classmethod
+    def new(self, type: str, errorEventInitDict: SensorErrorEventInit) -> SensorErrorEvent: ...
     error: DOMException
 
 class SensorErrorEventInit(TypedDict, EventInit):
@@ -5924,7 +6037,8 @@ class MockSensor(TypedDict):
 class MockSensorReadingValues(TypedDict): ...
 
 class GeolocationSensor(Sensor):
-    def New(self, options: GeolocationSensorOptions | None = {}) -> GeolocationSensor: ...
+    @classmethod
+    def new(self, options: GeolocationSensorOptions | None = {}) -> GeolocationSensor: ...
     latitude: float | None
     longitude: float | None
     altitude: float | None
@@ -5988,7 +6102,8 @@ class GeolocationPositionError:
     message: str
 
 class DOMPointReadOnly:
-    def New(self, x: float | None = 0, y: float | None = 0, z: float | None = 0, w: float | None = 1) -> DOMPointReadOnly: ...
+    @classmethod
+    def new(self, x: float | None = 0, y: float | None = 0, z: float | None = 0, w: float | None = 1) -> DOMPointReadOnly: ...
     x: float
     y: float
     z: float
@@ -5997,7 +6112,8 @@ class DOMPointReadOnly:
     def toJSON(self) -> object: ...
 
 class DOMPoint(DOMPointReadOnly):
-    def New(self, x: float | None = 0, y: float | None = 0, z: float | None = 0, w: float | None = 1) -> DOMPoint: ...
+    @classmethod
+    def new(self, x: float | None = 0, y: float | None = 0, z: float | None = 0, w: float | None = 1) -> DOMPoint: ...
     x: float
     y: float
     z: float
@@ -6010,7 +6126,8 @@ class DOMPointInit(TypedDict):
     w: NotRequired[float]
 
 class DOMRectReadOnly:
-    def New(self, x: float | None = 0, y: float | None = 0, width: float | None = 0, height: float | None = 0) -> DOMRectReadOnly: ...
+    @classmethod
+    def new(self, x: float | None = 0, y: float | None = 0, width: float | None = 0, height: float | None = 0) -> DOMRectReadOnly: ...
     x: float
     y: float
     width: float
@@ -6022,7 +6139,8 @@ class DOMRectReadOnly:
     def toJSON(self) -> object: ...
 
 class DOMRect(DOMRectReadOnly):
-    def New(self, x: float | None = 0, y: float | None = 0, width: float | None = 0, height: float | None = 0) -> DOMRect: ...
+    @classmethod
+    def new(self, x: float | None = 0, y: float | None = 0, width: float | None = 0, height: float | None = 0) -> DOMRect: ...
     x: float
     y: float
     width: float
@@ -6038,7 +6156,8 @@ class DOMRectList:
     length: int
 
 class DOMQuad:
-    def New(self, p1: DOMPointInit | None = {}, p2: DOMPointInit | None = {}, p3: DOMPointInit | None = {}, p4: DOMPointInit | None = {}) -> DOMQuad: ...
+    @classmethod
+    def new(self, p1: DOMPointInit | None = {}, p2: DOMPointInit | None = {}, p3: DOMPointInit | None = {}, p4: DOMPointInit | None = {}) -> DOMQuad: ...
     p1: DOMPoint
     p2: DOMPoint
     p3: DOMPoint
@@ -6053,7 +6172,8 @@ class DOMQuadInit(TypedDict):
     p4: NotRequired[DOMPointInit]
 
 class DOMMatrixReadOnly:
-    def New(self, init: str | Sequence[float] | None = None) -> DOMMatrixReadOnly: ...
+    @classmethod
+    def new(self, init: str | Sequence[float] | None = None) -> DOMMatrixReadOnly: ...
     a: float
     b: float
     c: float
@@ -6097,7 +6217,8 @@ class DOMMatrixReadOnly:
     def toJSON(self) -> object: ...
 
 class DOMMatrix(DOMMatrixReadOnly):
-    def New(self, init: str | Sequence[float] | None = None) -> DOMMatrix: ...
+    @classmethod
+    def new(self, init: str | Sequence[float] | None = None) -> DOMMatrix: ...
     a: float
     b: float
     c: float
@@ -6167,7 +6288,8 @@ class RelatedApplication(TypedDict):
     version: NotRequired[USVString]
 
 class Gyroscope(Sensor):
-    def New(self, sensorOptions: GyroscopeSensorOptions | None = {}) -> Gyroscope: ...
+    @classmethod
+    def new(self, sensorOptions: GyroscopeSensorOptions | None = {}) -> Gyroscope: ...
     x: float | None
     y: float | None
     z: float | None
@@ -6212,23 +6334,28 @@ class HTMLOrSVGElement:
 class DOMStringMap: ...
 
 class HTMLHtmlElement(HTMLElement):
-    def New(self) -> HTMLHtmlElement: ...
+    @classmethod
+    def new(self) -> HTMLHtmlElement: ...
     version: str
 
 class HTMLHeadElement(HTMLElement):
-    def New(self) -> HTMLHeadElement: ...
+    @classmethod
+    def new(self) -> HTMLHeadElement: ...
 
 class HTMLTitleElement(HTMLElement):
-    def New(self) -> HTMLTitleElement: ...
+    @classmethod
+    def new(self) -> HTMLTitleElement: ...
     text: str
 
 class HTMLBaseElement(HTMLElement):
-    def New(self) -> HTMLBaseElement: ...
+    @classmethod
+    def new(self) -> HTMLBaseElement: ...
     href: USVString
     target: str
 
 class HTMLLinkElement(HTMLElement, LinkStyle):
-    def New(self) -> HTMLLinkElement: ...
+    @classmethod
+    def new(self) -> HTMLLinkElement: ...
     href: USVString
     crossOrigin: str | None
     rel: str
@@ -6249,7 +6376,8 @@ class HTMLLinkElement(HTMLElement, LinkStyle):
     fetchPriority: str
 
 class HTMLMetaElement(HTMLElement):
-    def New(self) -> HTMLMetaElement: ...
+    @classmethod
+    def new(self) -> HTMLMetaElement: ...
     name: str
     httpEquiv: str
     content: str
@@ -6257,22 +6385,26 @@ class HTMLMetaElement(HTMLElement):
     scheme: str
 
 class HTMLStyleElement(HTMLElement, LinkStyle):
-    def New(self) -> HTMLStyleElement: ...
+    @classmethod
+    def new(self) -> HTMLStyleElement: ...
     disabled: bool
     media: str
     blocking: DOMTokenList
     type: str
 
 class HTMLHeadingElement(HTMLElement):
-    def New(self) -> HTMLHeadingElement: ...
+    @classmethod
+    def new(self) -> HTMLHeadingElement: ...
     align: str
 
 class HTMLParagraphElement(HTMLElement):
-    def New(self) -> HTMLParagraphElement: ...
+    @classmethod
+    def new(self) -> HTMLParagraphElement: ...
     align: str
 
 class HTMLHRElement(HTMLElement):
-    def New(self) -> HTMLHRElement: ...
+    @classmethod
+    def new(self) -> HTMLHRElement: ...
     align: str
     color: str
     noShade: bool
@@ -6280,55 +6412,67 @@ class HTMLHRElement(HTMLElement):
     width: str
 
 class HTMLPreElement(HTMLElement):
-    def New(self) -> HTMLPreElement: ...
+    @classmethod
+    def new(self) -> HTMLPreElement: ...
     width: int
 
 class HTMLQuoteElement(HTMLElement):
-    def New(self) -> HTMLQuoteElement: ...
+    @classmethod
+    def new(self) -> HTMLQuoteElement: ...
     cite: USVString
 
 class HTMLOListElement(HTMLElement):
-    def New(self) -> HTMLOListElement: ...
+    @classmethod
+    def new(self) -> HTMLOListElement: ...
     reversed: bool
     start: int
     type: str
     compact: bool
 
 class HTMLUListElement(HTMLElement):
-    def New(self) -> HTMLUListElement: ...
+    @classmethod
+    def new(self) -> HTMLUListElement: ...
     compact: bool
     type: str
 
 class HTMLMenuElement(HTMLElement):
-    def New(self) -> HTMLMenuElement: ...
+    @classmethod
+    def new(self) -> HTMLMenuElement: ...
     compact: bool
 
 class HTMLLIElement(HTMLElement):
-    def New(self) -> HTMLLIElement: ...
+    @classmethod
+    def new(self) -> HTMLLIElement: ...
     value: int
     type: str
 
 class HTMLDListElement(HTMLElement):
-    def New(self) -> HTMLDListElement: ...
+    @classmethod
+    def new(self) -> HTMLDListElement: ...
     compact: bool
 
 class HTMLDivElement(HTMLElement):
-    def New(self) -> HTMLDivElement: ...
+    @classmethod
+    def new(self) -> HTMLDivElement: ...
     align: str
 
 class HTMLDataElement(HTMLElement):
-    def New(self) -> HTMLDataElement: ...
+    @classmethod
+    def new(self) -> HTMLDataElement: ...
     value: str
 
 class HTMLTimeElement(HTMLElement):
-    def New(self) -> HTMLTimeElement: ...
+    @classmethod
+    def new(self) -> HTMLTimeElement: ...
     dateTime: str
 
 class HTMLSpanElement(HTMLElement):
-    def New(self) -> HTMLSpanElement: ...
+    @classmethod
+    def new(self) -> HTMLSpanElement: ...
 
 class HTMLBRElement(HTMLElement):
-    def New(self) -> HTMLBRElement: ...
+    @classmethod
+    def new(self) -> HTMLBRElement: ...
     clear: str
 
 class HTMLHyperlinkElementUtils:
@@ -6345,15 +6489,18 @@ class HTMLHyperlinkElementUtils:
     hash: USVString
 
 class HTMLModElement(HTMLElement):
-    def New(self) -> HTMLModElement: ...
+    @classmethod
+    def new(self) -> HTMLModElement: ...
     cite: USVString
     dateTime: str
 
 class HTMLPictureElement(HTMLElement):
-    def New(self) -> HTMLPictureElement: ...
+    @classmethod
+    def new(self) -> HTMLPictureElement: ...
 
 class HTMLSourceElement(HTMLElement):
-    def New(self) -> HTMLSourceElement: ...
+    @classmethod
+    def new(self) -> HTMLSourceElement: ...
     src: USVString
     type: str
     srcset: USVString
@@ -6363,7 +6510,8 @@ class HTMLSourceElement(HTMLElement):
     height: int
 
 class HTMLEmbedElement(HTMLElement):
-    def New(self) -> HTMLEmbedElement: ...
+    @classmethod
+    def new(self) -> HTMLEmbedElement: ...
     src: USVString
     type: str
     width: str
@@ -6373,7 +6521,8 @@ class HTMLEmbedElement(HTMLElement):
     name: str
 
 class HTMLObjectElement(HTMLElement):
-    def New(self) -> HTMLObjectElement: ...
+    @classmethod
+    def new(self) -> HTMLObjectElement: ...
     data: USVString
     type: str
     name: str
@@ -6402,7 +6551,8 @@ class HTMLObjectElement(HTMLElement):
     border: str
 
 class HTMLVideoElement(HTMLMediaElement):
-    def New(self) -> HTMLVideoElement: ...
+    @classmethod
+    def new(self) -> HTMLVideoElement: ...
     width: int
     height: int
     videoWidth: int
@@ -6418,13 +6568,15 @@ class HTMLVideoElement(HTMLMediaElement):
     def cancelVideoFrameCallback(self, handle: int): ...
 
 class HTMLAudioElement(HTMLMediaElement):
-    def New(self) -> HTMLAudioElement: ...
+    @classmethod
+    def new(self) -> HTMLAudioElement: ...
     """ # GIgnoredStmt 
     LegacyFactoryFunction=Audio(optional DOMString src)
     """
 
 class HTMLTrackElement(HTMLElement):
-    def New(self) -> HTMLTrackElement: ...
+    @classmethod
+    def new(self) -> HTMLTrackElement: ...
     kind: str
     src: USVString
     srclang: str
@@ -6516,19 +6668,22 @@ class TimeRanges:
     def end(self, index: int) -> float: ...
 
 class TrackEvent(Event):
-    def New(self, type: str, eventInitDict: TrackEventInit | None = {}) -> TrackEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: TrackEventInit | None = {}) -> TrackEvent: ...
     track: VideoTrack | AudioTrack | TextTrack | None
 
 class TrackEventInit(TypedDict, EventInit):
     track: NotRequired[VideoTrack | AudioTrack | TextTrack | None]
 
 class HTMLMapElement(HTMLElement):
-    def New(self) -> HTMLMapElement: ...
+    @classmethod
+    def new(self) -> HTMLMapElement: ...
     name: str
     areas: HTMLCollection
 
 class HTMLAreaElement(HTMLElement, HTMLHyperlinkElementUtils):
-    def New(self) -> HTMLAreaElement: ...
+    @classmethod
+    def new(self) -> HTMLAreaElement: ...
     alt: str
     coords: str
     shape: str
@@ -6541,7 +6696,8 @@ class HTMLAreaElement(HTMLElement, HTMLHyperlinkElementUtils):
     noHref: bool
 
 class HTMLTableElement(HTMLElement):
-    def New(self) -> HTMLTableElement: ...
+    @classmethod
+    def new(self) -> HTMLTableElement: ...
     caption: HTMLTableCaptionElement | None
     def createCaption(self) -> HTMLTableCaptionElement: ...
     def deleteCaption(self): ...
@@ -6567,11 +6723,13 @@ class HTMLTableElement(HTMLElement):
     cellSpacing: str
 
 class HTMLTableCaptionElement(HTMLElement):
-    def New(self) -> HTMLTableCaptionElement: ...
+    @classmethod
+    def new(self) -> HTMLTableCaptionElement: ...
     align: str
 
 class HTMLTableColElement(HTMLElement):
-    def New(self) -> HTMLTableColElement: ...
+    @classmethod
+    def new(self) -> HTMLTableColElement: ...
     span: int
     align: str
     ch: str
@@ -6580,7 +6738,8 @@ class HTMLTableColElement(HTMLElement):
     width: str
 
 class HTMLTableSectionElement(HTMLElement):
-    def New(self) -> HTMLTableSectionElement: ...
+    @classmethod
+    def new(self) -> HTMLTableSectionElement: ...
     rows: HTMLCollection
     def insertRow(self, index: int | None = -1) -> HTMLTableRowElement: ...
     def deleteRow(self, index: int): ...
@@ -6590,7 +6749,8 @@ class HTMLTableSectionElement(HTMLElement):
     vAlign: str
 
 class HTMLTableRowElement(HTMLElement):
-    def New(self) -> HTMLTableRowElement: ...
+    @classmethod
+    def new(self) -> HTMLTableRowElement: ...
     rowIndex: int
     sectionRowIndex: int
     cells: HTMLCollection
@@ -6603,7 +6763,8 @@ class HTMLTableRowElement(HTMLElement):
     bgColor: str
 
 class HTMLTableCellElement(HTMLElement):
-    def New(self) -> HTMLTableCellElement: ...
+    @classmethod
+    def new(self) -> HTMLTableCellElement: ...
     colSpan: int
     rowSpan: int
     headers: str
@@ -6621,7 +6782,8 @@ class HTMLTableCellElement(HTMLElement):
     bgColor: str
 
 class HTMLFormElement(HTMLElement):
-    def New(self) -> HTMLFormElement: ...
+    @classmethod
+    def new(self) -> HTMLFormElement: ...
     acceptCharset: str
     action: USVString
     autocomplete: str
@@ -6642,13 +6804,15 @@ class HTMLFormElement(HTMLElement):
     def reportValidity(self) -> bool: ...
 
 class HTMLLabelElement(HTMLElement):
-    def New(self) -> HTMLLabelElement: ...
+    @classmethod
+    def new(self) -> HTMLLabelElement: ...
     form: HTMLFormElement | None
     htmlFor: str
     control: HTMLElement | None
 
 class HTMLButtonElement(HTMLElement):
-    def New(self) -> HTMLButtonElement: ...
+    @classmethod
+    def new(self) -> HTMLButtonElement: ...
     disabled: bool
     form: HTMLFormElement | None
     formAction: USVString
@@ -6668,7 +6832,8 @@ class HTMLButtonElement(HTMLElement):
     labels: NodeList
 
 class HTMLSelectElement(HTMLElement):
-    def New(self) -> HTMLSelectElement: ...
+    @classmethod
+    def new(self) -> HTMLSelectElement: ...
     autocomplete: str
     disabled: bool
     form: HTMLFormElement | None
@@ -6697,16 +6862,19 @@ class HTMLSelectElement(HTMLElement):
     labels: NodeList
 
 class HTMLDataListElement(HTMLElement):
-    def New(self) -> HTMLDataListElement: ...
+    @classmethod
+    def new(self) -> HTMLDataListElement: ...
     options: HTMLCollection
 
 class HTMLOptGroupElement(HTMLElement):
-    def New(self) -> HTMLOptGroupElement: ...
+    @classmethod
+    def new(self) -> HTMLOptGroupElement: ...
     disabled: bool
     label: str
 
 class HTMLOptionElement(HTMLElement):
-    def New(self) -> HTMLOptionElement: ...
+    @classmethod
+    def new(self) -> HTMLOptionElement: ...
     """ # GIgnoredStmt 
     LegacyFactoryFunction=Option(optional DOMString text = "", optional DOMString value, optional boolean defaultSelected = false, optional boolean selected = false)
     """
@@ -6720,7 +6888,8 @@ class HTMLOptionElement(HTMLElement):
     index: int
 
 class HTMLTextAreaElement(HTMLElement):
-    def New(self) -> HTMLTextAreaElement: ...
+    @classmethod
+    def new(self) -> HTMLTextAreaElement: ...
     autocomplete: str
     cols: int
     dirName: str
@@ -6756,7 +6925,8 @@ class HTMLTextAreaElement(HTMLElement):
     def setSelectionRange(self, start: int, end: int, direction: str | None = None): ...
 
 class HTMLOutputElement(HTMLElement):
-    def New(self) -> HTMLOutputElement: ...
+    @classmethod
+    def new(self) -> HTMLOutputElement: ...
     htmlFor: DOMTokenList
     form: HTMLFormElement | None
     name: str
@@ -6772,14 +6942,16 @@ class HTMLOutputElement(HTMLElement):
     labels: NodeList
 
 class HTMLProgressElement(HTMLElement):
-    def New(self) -> HTMLProgressElement: ...
+    @classmethod
+    def new(self) -> HTMLProgressElement: ...
     value: float
     max: float
     position: float
     labels: NodeList
 
 class HTMLMeterElement(HTMLElement):
-    def New(self) -> HTMLMeterElement: ...
+    @classmethod
+    def new(self) -> HTMLMeterElement: ...
     value: float
     min: float
     max: float
@@ -6789,7 +6961,8 @@ class HTMLMeterElement(HTMLElement):
     labels: NodeList
 
 class HTMLFieldSetElement(HTMLElement):
-    def New(self) -> HTMLFieldSetElement: ...
+    @classmethod
+    def new(self) -> HTMLFieldSetElement: ...
     disabled: bool
     form: HTMLFormElement | None
     name: str
@@ -6803,7 +6976,8 @@ class HTMLFieldSetElement(HTMLElement):
     def setCustomValidity(self, error: str): ...
 
 class HTMLLegendElement(HTMLElement):
-    def New(self) -> HTMLLegendElement: ...
+    @classmethod
+    def new(self) -> HTMLLegendElement: ...
     form: HTMLFormElement | None
     align: str
 
@@ -6821,25 +6995,29 @@ class ValidityState:
     valid: bool
 
 class SubmitEvent(Event):
-    def New(self, type: str, eventInitDict: SubmitEventInit | None = {}) -> SubmitEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: SubmitEventInit | None = {}) -> SubmitEvent: ...
     submitter: HTMLElement | None
 
 class SubmitEventInit(TypedDict, EventInit):
     submitter: NotRequired[HTMLElement | None]
 
 class FormDataEvent(Event):
-    def New(self, type: str, eventInitDict: FormDataEventInit) -> FormDataEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: FormDataEventInit) -> FormDataEvent: ...
     formData: FormData
 
 class FormDataEventInit(TypedDict, EventInit):
     formData: FormData
 
 class HTMLDetailsElement(HTMLElement):
-    def New(self) -> HTMLDetailsElement: ...
+    @classmethod
+    def new(self) -> HTMLDetailsElement: ...
     open: bool
 
 class HTMLDialogElement(HTMLElement):
-    def New(self) -> HTMLDialogElement: ...
+    @classmethod
+    def new(self) -> HTMLDialogElement: ...
     open: bool
     returnValue: str
     def show(self): ...
@@ -6847,11 +7025,13 @@ class HTMLDialogElement(HTMLElement):
     def close(self, returnValue: str | None = None): ...
 
 class HTMLTemplateElement(HTMLElement):
-    def New(self) -> HTMLTemplateElement: ...
+    @classmethod
+    def new(self) -> HTMLTemplateElement: ...
     content: DocumentFragment
 
 class HTMLSlotElement(HTMLElement):
-    def New(self) -> HTMLSlotElement: ...
+    @classmethod
+    def new(self) -> HTMLSlotElement: ...
     name: str
     def assignedNodes(self, options: AssignedNodesOptions | None = {}) -> Sequence[Node]: ...
     def assignedElements(self, options: AssignedNodesOptions | None = {}) -> Sequence[Element]: ...
@@ -6861,7 +7041,8 @@ class AssignedNodesOptions(TypedDict):
     flatten: NotRequired[bool]
 
 class HTMLCanvasElement(HTMLElement):
-    def New(self) -> HTMLCanvasElement: ...
+    @classmethod
+    def new(self) -> HTMLCanvasElement: ...
     width: int
     height: int
     def getContext(self, contextId: str, options: Any | None = None) -> RenderingContext | None: ...
@@ -7043,16 +7224,19 @@ class ImageDataSettings(TypedDict):
 
 class ImageData:
     @overload
-    def New(self, sw: int, sh: int, settings: ImageDataSettings | None = {}) -> ImageData: ...
+    @classmethod
+    def new(self, sw: int, sh: int, settings: ImageDataSettings | None = {}) -> ImageData: ...
     @overload
-    def New(self, data: Uint8ClampedArray, sw: int, sh: int | None = None, settings: ImageDataSettings | None = {}) -> ImageData: ...
+    @classmethod
+    def new(self, data: Uint8ClampedArray, sw: int, sh: int | None = None, settings: ImageDataSettings | None = {}) -> ImageData: ...
     width: int
     height: int
     data: Uint8ClampedArray
     colorSpace: PredefinedColorSpace
 
 class Path2D(CanvasPath):
-    def New(self, path: Path2D | str | None = None) -> Path2D: ...
+    @classmethod
+    def new(self, path: Path2D | str | None = None) -> Path2D: ...
     def addPath(self, path: Path2D, transform: DOMMatrix2DInit | None = {}): ...
 
 class ImageBitmapRenderingContext:
@@ -7067,7 +7251,8 @@ class ImageEncodeOptions(TypedDict):
     quality: NotRequired[float]
 
 class OffscreenCanvas(EventTarget):
-    def New(self, width: int, height: int) -> OffscreenCanvas: ...
+    @classmethod
+    def new(self, width: int, height: int) -> OffscreenCanvas: ...
     width: int
     height: int
     def getContext(self, contextId: OffscreenRenderingContextId, options: Any | None = None) -> OffscreenRenderingContext | None: ...
@@ -7117,7 +7302,8 @@ class ElementContentEditable:
     virtualKeyboardPolicy: str
 
 class DataTransfer:
-    def New(self) -> DataTransfer: ...
+    @classmethod
+    def new(self) -> DataTransfer: ...
     dropEffect: str
     effectAllowed: str
     items: DataTransferItemList
@@ -7138,7 +7324,8 @@ class DataTransferItemList:
     def clear(self): ...
 
 class DragEvent(MouseEvent):
-    def New(self, type: str, eventInitDict: DragEventInit | None = {}) -> DragEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: DragEventInit | None = {}) -> DragEvent: ...
     dataTransfer: DataTransfer | None
 
 class DragEventInit(TypedDict, MouseEventInit):
@@ -7176,14 +7363,16 @@ class History:
     def replaceState(self, data: Any, unused: str, url: USVString | None = None): ...
 
 class PopStateEvent(Event):
-    def New(self, type: str, eventInitDict: PopStateEventInit | None = {}) -> PopStateEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: PopStateEventInit | None = {}) -> PopStateEvent: ...
     state: Any
 
 class PopStateEventInit(TypedDict, EventInit):
     state: NotRequired[Any]
 
 class HashChangeEvent(Event):
-    def New(self, type: str, eventInitDict: HashChangeEventInit | None = {}) -> HashChangeEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: HashChangeEventInit | None = {}) -> HashChangeEvent: ...
     oldURL: USVString
     newURL: USVString
 
@@ -7192,7 +7381,8 @@ class HashChangeEventInit(TypedDict, EventInit):
     newURL: NotRequired[USVString]
 
 class PageTransitionEvent(Event):
-    def New(self, type: str, eventInitDict: PageTransitionEventInit | None = {}) -> PageTransitionEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: PageTransitionEventInit | None = {}) -> PageTransitionEvent: ...
     persisted: bool
 
 class PageTransitionEventInit(TypedDict, EventInit):
@@ -7202,7 +7392,8 @@ class BeforeUnloadEvent(Event):
     returnValue: str
 
 class ErrorEvent(Event):
-    def New(self, type: str, eventInitDict: ErrorEventInit | None = {}) -> ErrorEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: ErrorEventInit | None = {}) -> ErrorEvent: ...
     message: str
     filename: USVString
     lineno: int
@@ -7217,7 +7408,8 @@ class ErrorEventInit(TypedDict, EventInit):
     error: NotRequired[Any]
 
 class PromiseRejectionEvent(Event):
-    def New(self, type: str, eventInitDict: PromiseRejectionEventInit) -> PromiseRejectionEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: PromiseRejectionEventInit) -> PromiseRejectionEvent: ...
     promise: Awaitable[Any]
     reason: Any
 
@@ -7226,7 +7418,8 @@ class PromiseRejectionEventInit(TypedDict, EventInit):
     reason: NotRequired[Any]
 
 class DOMParser:
-    def New(self) -> DOMParser: ...
+    @classmethod
+    def new(self) -> DOMParser: ...
     def parseFromString(self, string: str, type: DOMParserSupportedType) -> Document: ...
 
 class NavigatorID:
@@ -7310,7 +7503,8 @@ class DedicatedWorkerGlobalScope(WorkerGlobalScope, AnimationFrameProvider):
     onrtctransform: EventHandler
 
 class MessageEvent(Event):
-    def New(self, type: str, eventInitDict: MessageEventInit | None = {}) -> MessageEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: MessageEventInit | None = {}) -> MessageEvent: ...
     data: Any
     origin: USVString
     lastEventId: str
@@ -7326,7 +7520,8 @@ class MessageEventInit(TypedDict, EventInit):
     ports: NotRequired[Sequence[MessagePort]]
 
 class EventSource(EventTarget):
-    def New(self, url: USVString, eventSourceInitDict: EventSourceInit | None = {}) -> EventSource: ...
+    @classmethod
+    def new(self, url: USVString, eventSourceInitDict: EventSourceInit | None = {}) -> EventSource: ...
     url: USVString
     withCredentials: bool
     CONNECTING = 0
@@ -7342,7 +7537,8 @@ class EventSourceInit(TypedDict):
     withCredentials: NotRequired[bool]
 
 class MessageChannel:
-    def New(self) -> MessageChannel: ...
+    @classmethod
+    def new(self) -> MessageChannel: ...
     port1: MessagePort
     port2: MessagePort
 
@@ -7360,7 +7556,8 @@ class StructuredSerializeOptions(TypedDict):
     transfer: NotRequired[Sequence[object]]
 
 class BroadcastChannel(EventTarget):
-    def New(self, name: str) -> BroadcastChannel: ...
+    @classmethod
+    def new(self, name: str) -> BroadcastChannel: ...
     name: str
     def postMessage(self, message: Any): ...
     def close(self): ...
@@ -7376,7 +7573,8 @@ class AbstractWorker:
     onerror: EventHandler
 
 class Worker(EventTarget, AbstractWorker):
-    def New(self, scriptURL: USVString, options: WorkerOptions | None = {}) -> Worker: ...
+    @classmethod
+    def new(self, scriptURL: USVString, options: WorkerOptions | None = {}) -> Worker: ...
     def terminate(self): ...
     @overload
     def postMessage(self, message: Any, transfer: Sequence[object]): ...
@@ -7391,7 +7589,8 @@ class WorkerOptions(TypedDict):
     name: NotRequired[str]
 
 class SharedWorker(EventTarget, AbstractWorker):
-    def New(self, scriptURL: USVString, options: str | WorkerOptions | None = {}) -> SharedWorker: ...
+    @classmethod
+    def new(self, scriptURL: USVString, options: str | WorkerOptions | None = {}) -> SharedWorker: ...
     port: MessagePort
 
 class NavigatorConcurrentHardware:
@@ -7428,7 +7627,8 @@ class WindowLocalStorage:
     localStorage: Storage
 
 class StorageEvent(Event):
-    def New(self, type: str, eventInitDict: StorageEventInit | None = {}) -> StorageEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: StorageEventInit | None = {}) -> StorageEvent: ...
     key: str | None
     oldValue: str | None
     newValue: str | None
@@ -7444,7 +7644,8 @@ class StorageEventInit(TypedDict, EventInit):
     storageArea: NotRequired[Storage | None]
 
 class HTMLMarqueeElement(HTMLElement):
-    def New(self) -> HTMLMarqueeElement: ...
+    @classmethod
+    def new(self) -> HTMLMarqueeElement: ...
     behavior: str
     bgColor: str
     direction: str
@@ -7460,12 +7661,14 @@ class HTMLMarqueeElement(HTMLElement):
     def stop(self): ...
 
 class HTMLFrameSetElement(HTMLElement, WindowEventHandlers):
-    def New(self) -> HTMLFrameSetElement: ...
+    @classmethod
+    def new(self) -> HTMLFrameSetElement: ...
     cols: str
     rows: str
 
 class HTMLFrameElement(HTMLElement):
-    def New(self) -> HTMLFrameElement: ...
+    @classmethod
+    def new(self) -> HTMLFrameElement: ...
     name: str
     scrolling: str
     src: USVString
@@ -7478,17 +7681,20 @@ class HTMLFrameElement(HTMLElement):
     marginWidth: str
 
 class HTMLDirectoryElement(HTMLElement):
-    def New(self) -> HTMLDirectoryElement: ...
+    @classmethod
+    def new(self) -> HTMLDirectoryElement: ...
     compact: bool
 
 class HTMLFontElement(HTMLElement):
-    def New(self) -> HTMLFontElement: ...
+    @classmethod
+    def new(self) -> HTMLFontElement: ...
     color: str
     face: str
     size: str
 
 class HTMLParamElement(HTMLElement):
-    def New(self) -> HTMLParamElement: ...
+    @classmethod
+    def new(self) -> HTMLParamElement: ...
     name: str
     value: str
     type: str
@@ -7503,14 +7709,16 @@ class IdleOptions(TypedDict):
     signal: NotRequired[AbortSignal]
 
 class IdleDetector(EventTarget):
-    def New(self) -> IdleDetector: ...
+    @classmethod
+    def new(self) -> IdleDetector: ...
     userState: UserIdleState | None
     screenState: ScreenIdleState | None
     onchange: EventHandler
     def start(self, options: IdleOptions | None = {}) -> Awaitable[None]: ...
 
 class ImageCapture:
-    def New(self, videoTrack: MediaStreamTrack) -> ImageCapture: ...
+    @classmethod
+    def new(self, videoTrack: MediaStreamTrack) -> ImageCapture: ...
     def takePhoto(self, photoSettings: PhotoSettings | None = {}) -> Awaitable[Blob]: ...
     def getPhotoCapabilities(self) -> Awaitable[PhotoCapabilities]: ...
     def getPhotoSettings(self) -> Awaitable[PhotoSettings]: ...
@@ -7717,7 +7925,8 @@ class InkTrailStyle(TypedDict):
     diameter: float
 
 class InputDeviceCapabilities:
-    def New(self, deviceInitDict: InputDeviceCapabilitiesInit | None = {}) -> InputDeviceCapabilities: ...
+    @classmethod
+    def new(self, deviceInitDict: InputDeviceCapabilitiesInit | None = {}) -> InputDeviceCapabilities: ...
     firesTouchEvents: bool
     pointerMovementScrolls: bool
 
@@ -7726,7 +7935,8 @@ class InputDeviceCapabilitiesInit(TypedDict):
     pointerMovementScrolls: NotRequired[bool]
 
 class UIEvent(Event):
-    def New(self, type: str, eventInitDict: UIEventInit | None = {}) -> UIEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: UIEventInit | None = {}) -> UIEvent: ...
     sourceCapabilities: InputDeviceCapabilities | None
     view: Window | None
     detail: int
@@ -7740,7 +7950,8 @@ class UIEventInit(TypedDict, TypedDict, EventInit, TypedDict):
     which: NotRequired[int]
 
 class InputEvent(UIEvent):
-    def New(self, type: str, eventInitDict: InputEventInit | None = {}) -> InputEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: InputEventInit | None = {}) -> InputEvent: ...
     dataTransfer: DataTransfer | None
     def getTargetRanges(self) -> Sequence[StaticRange]: ...
     data: str | None
@@ -7755,7 +7966,8 @@ class InputEventInit(TypedDict, TypedDict, UIEventInit):
     inputType: NotRequired[str]
 
 class IntersectionObserver:
-    def New(self, callback: IntersectionObserverCallback, options: IntersectionObserverInit | None = {}) -> IntersectionObserver: ...
+    @classmethod
+    def new(self, callback: IntersectionObserverCallback, options: IntersectionObserverInit | None = {}) -> IntersectionObserver: ...
     root: Element | Document | None
     rootMargin: str
     thresholds: Sequence[float]
@@ -7765,7 +7977,8 @@ class IntersectionObserver:
     def takeRecords(self) -> Sequence[IntersectionObserverEntry]: ...
 
 class IntersectionObserverEntry:
-    def New(self, intersectionObserverEntryInit: IntersectionObserverEntryInit) -> IntersectionObserverEntry: ...
+    @classmethod
+    def new(self, intersectionObserverEntryInit: IntersectionObserverEntryInit) -> IntersectionObserverEntry: ...
     time: DOMHighResTimeStamp
     rootBounds: DOMRectReadOnly | None
     boundingClientRect: DOMRectReadOnly
@@ -7803,7 +8016,8 @@ class Scheduling:
     def isInputPending(self, isInputPendingOptions: IsInputPendingOptions | None = {}) -> bool: ...
 
 class Profiler(EventTarget):
-    def New(self, options: ProfilerInitOptions) -> Profiler: ...
+    @classmethod
+    def new(self, options: ProfilerInitOptions) -> Profiler: ...
     sampleInterval: DOMHighResTimeStamp
     stopped: bool
     def stop(self) -> Awaitable[ProfilerTrace]: ...
@@ -7835,25 +8049,30 @@ class ProfilerInitOptions(TypedDict):
 class JsonLd: ...
 
 class JsonLdProcessor:
-    def New(self) -> JsonLdProcessor: ...
+    @classmethod
+    def new(self) -> JsonLdProcessor: ...
 
 class RdfDataset:
-    def New(self) -> RdfDataset: ...
+    @classmethod
+    def new(self) -> RdfDataset: ...
     defaultGraph: RdfGraph
     def add(self, graphName: USVString, graph: RdfGraph): ...
 
 class RdfGraph:
-    def New(self) -> RdfGraph: ...
+    @classmethod
+    def new(self) -> RdfGraph: ...
     def add(self, triple: RdfTriple): ...
 
 class RdfTriple:
-    def New(self) -> RdfTriple: ...
+    @classmethod
+    def new(self) -> RdfTriple: ...
     subject: USVString
     predicate: USVString
     object: USVString | RdfLiteral
 
 class RdfLiteral:
-    def New(self) -> RdfLiteral: ...
+    @classmethod
+    def new(self) -> RdfLiteral: ...
     value: USVString
     datatype: USVString
     language: USVString | None
@@ -7885,7 +8104,8 @@ class LoadDocumentOptions(TypedDict):
     requestProfile: NotRequired[USVString | Sequence[USVString]]
 
 class RemoteDocument:
-    def New(self) -> RemoteDocument: ...
+    @classmethod
+    def new(self) -> RemoteDocument: ...
     contentType: USVString
     contextUrl: USVString
     document: Any
@@ -7951,7 +8171,8 @@ class TaskAttributionTiming(PerformanceEntry):
     def toJSON(self) -> object: ...
 
 class Magnetometer(Sensor):
-    def New(self, sensorOptions: MagnetometerSensorOptions | None = {}) -> Magnetometer: ...
+    @classmethod
+    def new(self, sensorOptions: MagnetometerSensorOptions | None = {}) -> Magnetometer: ...
     x: float | None
     y: float | None
     z: float | None
@@ -7960,7 +8181,8 @@ class MagnetometerSensorOptions(TypedDict, SensorOptions):
     referenceFrame: NotRequired[MagnetometerLocalCoordinateSystem]
 
 class UncalibratedMagnetometer(Sensor):
-    def New(self, sensorOptions: MagnetometerSensorOptions | None = {}) -> UncalibratedMagnetometer: ...
+    @classmethod
+    def new(self, sensorOptions: MagnetometerSensorOptions | None = {}) -> UncalibratedMagnetometer: ...
     x: float | None
     y: float | None
     z: float | None
@@ -7982,7 +8204,8 @@ class UncalibratedMagnetometerReadingValues(TypedDict):
     zBias: float | None
 
 class BeforeInstallPromptEvent(Event):
-    def New(self, type: str, eventInitDict: EventInit | None = {}) -> BeforeInstallPromptEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: EventInit | None = {}) -> BeforeInstallPromptEvent: ...
     def prompt(self) -> Awaitable[PromptResponseObject]: ...
 
 class PromptResponseObject(TypedDict):
@@ -8055,7 +8278,8 @@ class VideoPlaybackQuality:
     corruptedVideoFrames: int
 
 class MediaSource(EventTarget):
-    def New(self) -> MediaSource: ...
+    @classmethod
+    def new(self) -> MediaSource: ...
     handle: MediaSourceHandle
     sourceBuffers: SourceBufferList
     activeSourceBuffers: SourceBufferList
@@ -8118,7 +8342,8 @@ class CanvasCaptureMediaStreamTrack(MediaStreamTrack):
     def requestFrame(self): ...
 
 class CaptureActionEvent(Event):
-    def New(self, init: CaptureActionEventInit | None = {}) -> CaptureActionEvent: ...
+    @classmethod
+    def new(self, init: CaptureActionEventInit | None = {}) -> CaptureActionEvent: ...
     action: CaptureAction
 
 class CaptureActionEventInit(TypedDict, EventInit):
@@ -8132,11 +8357,14 @@ class BrowserCaptureMediaStreamTrack(MediaStreamTrack):
 
 class MediaStream(EventTarget):
     @overload
-    def New(self) -> MediaStream: ...
+    @classmethod
+    def new(self) -> MediaStream: ...
     @overload
-    def New(self, stream: MediaStream) -> MediaStream: ...
+    @classmethod
+    def new(self, stream: MediaStream) -> MediaStream: ...
     @overload
-    def New(self, tracks: Sequence[MediaStreamTrack]) -> MediaStream: ...
+    @classmethod
+    def new(self, tracks: Sequence[MediaStreamTrack]) -> MediaStream: ...
     id: str
     def getAudioTracks(self) -> Sequence[MediaStreamTrack]: ...
     def getVideoTracks(self) -> Sequence[MediaStreamTrack]: ...
@@ -8153,14 +8381,16 @@ class MediaTrackConstraints(TypedDict, MediaTrackConstraintSet):
     advanced: NotRequired[Sequence[MediaTrackConstraintSet]]
 
 class MediaStreamTrackEvent(Event):
-    def New(self, type: str, eventInitDict: MediaStreamTrackEventInit) -> MediaStreamTrackEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: MediaStreamTrackEventInit) -> MediaStreamTrackEvent: ...
     track: MediaStreamTrack
 
 class MediaStreamTrackEventInit(TypedDict, EventInit):
     track: MediaStreamTrack
 
 class OverconstrainedError(DOMException):
-    def New(self, constraint: str, message: str | None = "") -> OverconstrainedError: ...
+    @classmethod
+    def new(self, constraint: str, message: str | None = "") -> OverconstrainedError: ...
     constraint: str
 
 class MediaDeviceInfo:
@@ -8210,7 +8440,8 @@ class CameraDevicePermissionDescriptor(TypedDict, DevicePermissionDescriptor):
     panTiltZoom: NotRequired[bool]
 
 class MediaStreamTrackProcessor:
-    def New(self, init: MediaStreamTrackProcessorInit) -> MediaStreamTrackProcessor: ...
+    @classmethod
+    def new(self, init: MediaStreamTrackProcessorInit) -> MediaStreamTrackProcessor: ...
     readable: ReadableStream
 
 class MediaStreamTrackProcessorInit(TypedDict):
@@ -8218,7 +8449,8 @@ class MediaStreamTrackProcessorInit(TypedDict):
     maxBufferSize: NotRequired[int]
 
 class VideoTrackGenerator:
-    def New(self) -> VideoTrackGenerator: ...
+    @classmethod
+    def new(self) -> VideoTrackGenerator: ...
     writable: WritableStream
     muted: bool
     track: MediaStreamTrack
@@ -8236,7 +8468,8 @@ class MediaSession:
     def setCameraActive(self, active: bool): ...
 
 class MediaMetadata:
-    def New(self, init: MediaMetadataInit | None = {}) -> MediaMetadata: ...
+    @classmethod
+    def new(self, init: MediaMetadataInit | None = {}) -> MediaMetadata: ...
     title: str
     artist: str
     album: str
@@ -8265,7 +8498,8 @@ class MediaSessionActionDetails(TypedDict):
     fastSeek: NotRequired[bool]
 
 class MediaRecorder(EventTarget):
-    def New(self, stream: MediaStream, options: MediaRecorderOptions | None = {}) -> MediaRecorder: ...
+    @classmethod
+    def new(self, stream: MediaStream, options: MediaRecorderOptions | None = {}) -> MediaRecorder: ...
     stream: MediaStream
     mimeType: str
     state: RecordingState
@@ -8292,7 +8526,8 @@ class MediaRecorderOptions(TypedDict):
     audioBitrateMode: NotRequired[BitrateMode]
 
 class BlobEvent(Event):
-    def New(self, type: str, eventInitDict: BlobEventInit) -> BlobEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: BlobEventInit) -> BlobEvent: ...
     data: Blob
     timecode: DOMHighResTimeStamp
 
@@ -8342,7 +8577,8 @@ class NavigationResult(TypedDict):
     finished: NotRequired[Awaitable[NavigationHistoryEntry]]
 
 class NavigationCurrentEntryChangeEvent(Event):
-    def New(self, type: str, eventInit: NavigationCurrentEntryChangeEventInit) -> NavigationCurrentEntryChangeEvent: ...
+    @classmethod
+    def new(self, type: str, eventInit: NavigationCurrentEntryChangeEventInit) -> NavigationCurrentEntryChangeEvent: ...
     navigationType: NavigationType | None
     from_: NavigationHistoryEntry
 
@@ -8356,7 +8592,8 @@ class NavigationTransition:
     finished: Awaitable[None]
 
 class NavigateEvent(Event):
-    def New(self, type: str, eventInit: NavigateEventInit) -> NavigateEvent: ...
+    @classmethod
+    def new(self, type: str, eventInit: NavigateEventInit) -> NavigateEvent: ...
     navigationType: NavigationType
     destination: NavigationDestination
     canIntercept: bool
@@ -8461,7 +8698,8 @@ class NetworkInformation(EventTarget, NetworkInformationSaveData):
     onchange: EventHandler
 
 class Notification(EventTarget):
-    def New(self, title: str, options: NotificationOptions | None = {}) -> Notification: ...
+    @classmethod
+    def new(self, title: str, options: NotificationOptions | None = {}) -> Notification: ...
     onclick: EventHandler
     onshow: EventHandler
     onerror: EventHandler
@@ -8508,7 +8746,8 @@ class GetNotificationOptions(TypedDict):
     tag: NotRequired[str]
 
 class NotificationEvent(ExtendableEvent):
-    def New(self, type: str, eventInitDict: NotificationEventInit) -> NotificationEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: NotificationEventInit) -> NotificationEvent: ...
     notification: Notification
     action: str
 
@@ -8517,7 +8756,8 @@ class NotificationEventInit(TypedDict, ExtendableEventInit):
     action: NotRequired[str]
 
 class DeviceOrientationEvent(Event):
-    def New(self, type: str, eventInitDict: DeviceOrientationEventInit | None = {}) -> DeviceOrientationEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: DeviceOrientationEventInit | None = {}) -> DeviceOrientationEvent: ...
     alpha: float | None
     beta: float | None
     gamma: float | None
@@ -8540,7 +8780,8 @@ class DeviceMotionEventRotationRate:
     gamma: float | None
 
 class DeviceMotionEvent(Event):
-    def New(self, type: str, eventInitDict: DeviceMotionEventInit | None = {}) -> DeviceMotionEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: DeviceMotionEventInit | None = {}) -> DeviceMotionEvent: ...
     acceleration: DeviceMotionEventAcceleration | None
     accelerationIncludingGravity: DeviceMotionEventAcceleration | None
     rotationRate: DeviceMotionEventRotationRate | None
@@ -8570,10 +8811,12 @@ class OrientationSensorOptions(TypedDict, SensorOptions):
     referenceFrame: NotRequired[OrientationSensorLocalCoordinateSystem]
 
 class AbsoluteOrientationSensor(OrientationSensor):
-    def New(self, sensorOptions: OrientationSensorOptions | None = {}) -> AbsoluteOrientationSensor: ...
+    @classmethod
+    def new(self, sensorOptions: OrientationSensorOptions | None = {}) -> AbsoluteOrientationSensor: ...
 
 class RelativeOrientationSensor(OrientationSensor):
-    def New(self, sensorOptions: OrientationSensorOptions | None = {}) -> RelativeOrientationSensor: ...
+    @classmethod
+    def new(self, sensorOptions: OrientationSensorOptions | None = {}) -> RelativeOrientationSensor: ...
 
 class AbsoluteOrientationReadingValues(TypedDict):
     quaternion: Sequence[float]
@@ -8617,7 +8860,8 @@ class ImageObject(TypedDict):
     type: NotRequired[str]
 
 class CanMakePaymentEvent(ExtendableEvent):
-    def New(self, type: str) -> CanMakePaymentEvent: ...
+    @classmethod
+    def new(self, type: str) -> CanMakePaymentEvent: ...
     def respondWith(self, canMakePaymentResponse: Awaitable[bool]): ...
 
 class PaymentRequestDetailsUpdate(TypedDict):
@@ -8629,7 +8873,8 @@ class PaymentRequestDetailsUpdate(TypedDict):
     shippingAddressErrors: NotRequired[AddressErrors]
 
 class PaymentRequestEvent(ExtendableEvent):
-    def New(self, type: str, eventInitDict: PaymentRequestEventInit | None = {}) -> PaymentRequestEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: PaymentRequestEventInit | None = {}) -> PaymentRequestEvent: ...
     topOrigin: USVString
     paymentRequestOrigin: USVString
     paymentRequestId: str
@@ -8702,7 +8947,8 @@ class AddressErrors(TypedDict):
     sortingCode: NotRequired[str]
 
 class PaymentRequest(EventTarget):
-    def New(self, methodData: Sequence[PaymentMethodData], details: PaymentDetailsInit) -> PaymentRequest: ...
+    @classmethod
+    def new(self, methodData: Sequence[PaymentMethodData], details: PaymentDetailsInit) -> PaymentRequest: ...
     def show(self, detailsPromise: Awaitable[PaymentDetailsUpdate] | None = None) -> Awaitable[PaymentResponse]: ...
     def abort(self) -> Awaitable[None]: ...
     def canMakePayment(self) -> Awaitable[bool]: ...
@@ -8756,7 +9002,8 @@ class PaymentValidationErrors(TypedDict):
     paymentMethod: NotRequired[object]
 
 class PaymentMethodChangeEvent(PaymentRequestUpdateEvent):
-    def New(self, type: str, eventInitDict: PaymentMethodChangeEventInit | None = {}) -> PaymentMethodChangeEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: PaymentMethodChangeEventInit | None = {}) -> PaymentMethodChangeEvent: ...
     methodName: str
     methodDetails: object | None
 
@@ -8765,7 +9012,8 @@ class PaymentMethodChangeEventInit(TypedDict, PaymentRequestUpdateEventInit):
     methodDetails: NotRequired[object | None]
 
 class PaymentRequestUpdateEvent(Event):
-    def New(self, type: str, eventInitDict: PaymentRequestUpdateEventInit | None = {}) -> PaymentRequestUpdateEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: PaymentRequestUpdateEventInit | None = {}) -> PaymentRequestUpdateEvent: ...
     def updateWith(self, detailsPromise: Awaitable[PaymentDetailsUpdate]): ...
 
 class PaymentRequestUpdateEventInit(TypedDict, EventInit): ...
@@ -8796,7 +9044,8 @@ class PerformanceEntry:
     def toJSON(self) -> object: ...
 
 class PerformanceObserver:
-    def New(self, callback: PerformanceObserverCallback) -> PerformanceObserver: ...
+    @classmethod
+    def new(self, callback: PerformanceObserverCallback) -> PerformanceObserver: ...
     def observe(self, options: PerformanceObserverInit | None = {}): ...
     def disconnect(self): ...
     def takeRecords(self) -> PerformanceEntryList: ...
@@ -8821,7 +9070,8 @@ class PeriodicSyncEventInit(TypedDict, ExtendableEventInit):
     tag: str
 
 class PeriodicSyncEvent(ExtendableEvent):
-    def New(self, type: str, init: PeriodicSyncEventInit) -> PeriodicSyncEvent: ...
+    @classmethod
+    def new(self, type: str, init: PeriodicSyncEventInit) -> PeriodicSyncEvent: ...
     tag: str
 
 class PermissionsPolicy:
@@ -8860,7 +9110,8 @@ class PictureInPictureWindow(EventTarget):
     onresize: EventHandler
 
 class PictureInPictureEvent(Event):
-    def New(self, type: str, eventInitDict: PictureInPictureEventInit) -> PictureInPictureEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: PictureInPictureEventInit) -> PictureInPictureEvent: ...
     pictureInPictureWindow: PictureInPictureWindow
 
 class PictureInPictureEventInit(TypedDict, EventInit):
@@ -8883,7 +9134,8 @@ class PointerEventInit(TypedDict, MouseEventInit):
     predictedEvents: NotRequired[Sequence[PointerEvent]]
 
 class PointerEvent(MouseEvent):
-    def New(self, type: str, eventInitDict: PointerEventInit | None = {}) -> PointerEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: PointerEventInit | None = {}) -> PointerEvent: ...
     pointerId: int
     width: float
     height: float
@@ -8911,7 +9163,8 @@ class MouseEventInit(TypedDict, TypedDict, EventModifierInit):
     relatedTarget: NotRequired[EventTarget | None]
 
 class HTMLPortalElement(HTMLElement):
-    def New(self) -> HTMLPortalElement: ...
+    @classmethod
+    def new(self) -> HTMLPortalElement: ...
     src: USVString
     referrerPolicy: str
     def activate(self, options: PortalActivateOptions | None = {}) -> Awaitable[None]: ...
@@ -8928,7 +9181,8 @@ class PortalHost(EventTarget):
     onmessageerror: EventHandler
 
 class PortalActivateEvent(Event):
-    def New(self, type: str, eventInitDict: PortalActivateEventInit | None = {}) -> PortalActivateEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: PortalActivateEventInit | None = {}) -> PortalActivateEvent: ...
     data: Any
     def adoptPredecessor(self) -> HTMLPortalElement: ...
 
@@ -8941,9 +9195,11 @@ class Presentation:
 
 class PresentationRequest(EventTarget):
     @overload
-    def New(self, url: USVString) -> PresentationRequest: ...
+    @classmethod
+    def new(self, url: USVString) -> PresentationRequest: ...
     @overload
-    def New(self, urls: Sequence[USVString]) -> PresentationRequest: ...
+    @classmethod
+    def new(self, urls: Sequence[USVString]) -> PresentationRequest: ...
     def start(self) -> Awaitable[PresentationConnection]: ...
     def reconnect(self, presentationId: USVString) -> Awaitable[PresentationConnection]: ...
     def getAvailability(self) -> Awaitable[PresentationAvailability]: ...
@@ -8954,7 +9210,8 @@ class PresentationAvailability(EventTarget):
     onchange: EventHandler
 
 class PresentationConnectionAvailableEvent(Event):
-    def New(self, type: str, eventInitDict: PresentationConnectionAvailableEventInit) -> PresentationConnectionAvailableEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: PresentationConnectionAvailableEventInit) -> PresentationConnectionAvailableEvent: ...
     connection: PresentationConnection
 
 class PresentationConnectionAvailableEventInit(TypedDict, EventInit):
@@ -8981,7 +9238,8 @@ class PresentationConnection(EventTarget):
     def send(self, data: ArrayBufferView): ...
 
 class PresentationConnectionCloseEvent(Event):
-    def New(self, type: str, eventInitDict: PresentationConnectionCloseEventInit) -> PresentationConnectionCloseEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: PresentationConnectionCloseEventInit) -> PresentationConnectionCloseEvent: ...
     reason: PresentationConnectionCloseReason
     message: str
 
@@ -8997,7 +9255,8 @@ class PresentationConnectionList(EventTarget):
     onconnectionavailable: EventHandler
 
 class ProximitySensor(Sensor):
-    def New(self, sensorOptions: SensorOptions | None = {}) -> ProximitySensor: ...
+    @classmethod
+    def new(self, sensorOptions: SensorOptions | None = {}) -> ProximitySensor: ...
     distance: float | None
     max: float | None
     near: bool | None
@@ -9043,14 +9302,16 @@ class PushMessageData:
     def text(self) -> USVString: ...
 
 class PushEvent(ExtendableEvent):
-    def New(self, type: str, eventInitDict: PushEventInit | None = {}) -> PushEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: PushEventInit | None = {}) -> PushEvent: ...
     data: PushMessageData | None
 
 class PushEventInit(TypedDict, ExtendableEventInit):
     data: NotRequired[PushMessageDataInit]
 
 class PushSubscriptionChangeEvent(ExtendableEvent):
-    def New(self, type: str, eventInitDict: PushSubscriptionChangeEventInit | None = {}) -> PushSubscriptionChangeEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: PushSubscriptionChangeEventInit | None = {}) -> PushSubscriptionChangeEvent: ...
     newSubscription: PushSubscription | None
     oldSubscription: PushSubscription | None
 
@@ -9072,7 +9333,8 @@ class XRCamera:
     height: int
 
 class XRWebGLBinding:
-    def New(self, session: XRSession, context: XRWebGLRenderingContext) -> XRWebGLBinding: ...
+    @classmethod
+    def new(self, session: XRSession, context: XRWebGLRenderingContext) -> XRWebGLBinding: ...
     def getCameraImage(self, camera: XRCamera) -> WebGLTexture | None: ...
     def getDepthInformation(self, view: XRView) -> XRWebGLDepthInformation | None: ...
     def getReflectionCubeMap(self, lightProbe: XRLightProbe) -> WebGLTexture | None: ...
@@ -9105,7 +9367,8 @@ class Report:
     body: ReportBody | None
 
 class ReportingObserver:
-    def New(self, callback: ReportingObserverCallback, options: ReportingObserverOptions | None = {}) -> ReportingObserver: ...
+    @classmethod
+    def new(self, callback: ReportingObserverCallback, options: ReportingObserverOptions | None = {}) -> ReportingObserver: ...
     def observe(self): ...
     def disconnect(self): ...
     def takeRecords(self) -> ReportList: ...
@@ -9129,7 +9392,8 @@ class ResizeObserverOptions(TypedDict):
     box: NotRequired[ResizeObserverBoxOptions]
 
 class ResizeObserver:
-    def New(self, callback: ResizeObserverCallback) -> ResizeObserver: ...
+    @classmethod
+    def new(self, callback: ResizeObserverCallback) -> ResizeObserver: ...
     def observe(self, target: Element, options: ResizeObserverOptions | None = {}): ...
     def unobserve(self, target: Element): ...
     def disconnect(self): ...
@@ -9169,7 +9433,8 @@ class PerformanceResourceTiming(PerformanceEntry):
     serverTiming: Sequence[PerformanceServerTiming]
 
 class Sanitizer:
-    def New(self, config: SanitizerConfig | None = {}) -> Sanitizer: ...
+    @classmethod
+    def new(self, config: SanitizerConfig | None = {}) -> Sanitizer: ...
     def sanitize(self, input: Document | DocumentFragment) -> DocumentFragment: ...
     def sanitizeFor(self, element: str, input: str) -> Element | None: ...
     def getConfiguration(self) -> SanitizerConfig: ...
@@ -9199,7 +9464,8 @@ class Scheduler:
     def postTask(self, callback: SchedulerPostTaskCallback, options: SchedulerPostTaskOptions | None = {}) -> Awaitable[Any]: ...
 
 class TaskPriorityChangeEvent(Event):
-    def New(self, type: str, priorityChangeEventInitDict: TaskPriorityChangeEventInit) -> TaskPriorityChangeEvent: ...
+    @classmethod
+    def new(self, type: str, priorityChangeEventInitDict: TaskPriorityChangeEventInit) -> TaskPriorityChangeEvent: ...
     previousPriority: TaskPriority
 
 class TaskPriorityChangeEventInit(TypedDict, EventInit):
@@ -9209,7 +9475,8 @@ class TaskControllerInit(TypedDict):
     priority: NotRequired[TaskPriority]
 
 class TaskController(AbortController):
-    def New(self, init: TaskControllerInit | None = {}) -> TaskController: ...
+    @classmethod
+    def new(self, init: TaskControllerInit | None = {}) -> TaskController: ...
     def setPriority(self, priority: TaskPriority): ...
 
 class TaskSignal(AbortSignal):
@@ -9217,7 +9484,8 @@ class TaskSignal(AbortSignal):
     onprioritychange: EventHandler
 
 class CaptureController:
-    def New(self) -> CaptureController: ...
+    @classmethod
+    def new(self) -> CaptureController: ...
     def setFocusBehavior(self, focusBehavior: CaptureStartFocusBehavior): ...
 
 class DisplayMediaStreamOptions(TypedDict):
@@ -9249,7 +9517,8 @@ class ScrollTimelineOptions(TypedDict):
     axis: NotRequired[ScrollAxis]
 
 class ScrollTimeline(AnimationTimeline):
-    def New(self, options: ScrollTimelineOptions | None = {}) -> ScrollTimeline: ...
+    @classmethod
+    def new(self, options: ScrollTimelineOptions | None = {}) -> ScrollTimeline: ...
     source: Element | None
     axis: ScrollAxis
 
@@ -9258,7 +9527,8 @@ class ViewTimelineOptions(TypedDict):
     axis: NotRequired[ScrollAxis]
 
 class ViewTimeline(ScrollTimeline):
-    def New(self, options: ViewTimelineOptions | None = {}) -> ViewTimeline: ...
+    @classmethod
+    def new(self, options: ViewTimelineOptions | None = {}) -> ViewTimeline: ...
     subject: Element
     startOffset: CSSNumericValue
     endOffset: CSSNumericValue
@@ -9439,13 +9709,15 @@ class ClientQueryOptions(TypedDict):
     type: NotRequired[ClientType]
 
 class ExtendableEvent(Event):
-    def New(self, type: str, eventInitDict: ExtendableEventInit | None = {}) -> ExtendableEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: ExtendableEventInit | None = {}) -> ExtendableEvent: ...
     def waitUntil(self, f: Awaitable[Any]): ...
 
 class ExtendableEventInit(TypedDict, EventInit): ...
 
 class FetchEvent(ExtendableEvent):
-    def New(self, type: str, eventInitDict: FetchEventInit) -> FetchEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: FetchEventInit) -> FetchEvent: ...
     request: Request
     preloadResponse: Awaitable[Any]
     clientId: str
@@ -9463,7 +9735,8 @@ class FetchEventInit(TypedDict, ExtendableEventInit):
     handled: NotRequired[Awaitable[None]]
 
 class ExtendableMessageEvent(ExtendableEvent):
-    def New(self, type: str, eventInitDict: ExtendableMessageEventInit | None = {}) -> ExtendableMessageEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: ExtendableMessageEventInit | None = {}) -> ExtendableMessageEvent: ...
     data: Any
     origin: USVString
     lastEventId: str
@@ -9502,7 +9775,8 @@ class MultiCacheQueryOptions(TypedDict, CacheQueryOptions):
     cacheName: NotRequired[str]
 
 class FaceDetector:
-    def New(self, faceDetectorOptions: FaceDetectorOptions | None = {}) -> FaceDetector: ...
+    @classmethod
+    def new(self, faceDetectorOptions: FaceDetectorOptions | None = {}) -> FaceDetector: ...
     def detect(self, image: ImageBitmapSource) -> Awaitable[Sequence[DetectedFace]]: ...
 
 class FaceDetectorOptions(TypedDict):
@@ -9518,7 +9792,8 @@ class Landmark(TypedDict):
     type: NotRequired[LandmarkType]
 
 class BarcodeDetector:
-    def New(self, barcodeDetectorOptions: BarcodeDetectorOptions | None = {}) -> BarcodeDetector: ...
+    @classmethod
+    def new(self, barcodeDetectorOptions: BarcodeDetectorOptions | None = {}) -> BarcodeDetector: ...
     def detect(self, image: ImageBitmapSource) -> Awaitable[Sequence[DetectedBarcode]]: ...
 
 class BarcodeDetectorOptions(TypedDict):
@@ -9531,7 +9806,8 @@ class DetectedBarcode(TypedDict):
     cornerPoints: Sequence[Point2D]
 
 class SpeechRecognition(EventTarget):
-    def New(self) -> SpeechRecognition: ...
+    @classmethod
+    def new(self) -> SpeechRecognition: ...
     grammars: SpeechGrammarList
     lang: str
     continuous: bool
@@ -9553,7 +9829,8 @@ class SpeechRecognition(EventTarget):
     onend: EventHandler
 
 class SpeechRecognitionErrorEvent(Event):
-    def New(self, type: str, eventInitDict: SpeechRecognitionErrorEventInit) -> SpeechRecognitionErrorEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: SpeechRecognitionErrorEventInit) -> SpeechRecognitionErrorEvent: ...
     error: SpeechRecognitionErrorCode
     message: str
 
@@ -9573,7 +9850,8 @@ class SpeechRecognitionResultList:
     length: int
 
 class SpeechRecognitionEvent(Event):
-    def New(self, type: str, eventInitDict: SpeechRecognitionEventInit) -> SpeechRecognitionEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: SpeechRecognitionEventInit) -> SpeechRecognitionEvent: ...
     resultIndex: int
     results: SpeechRecognitionResultList
 
@@ -9586,7 +9864,8 @@ class SpeechGrammar:
     weight: float
 
 class SpeechGrammarList:
-    def New(self) -> SpeechGrammarList: ...
+    @classmethod
+    def new(self) -> SpeechGrammarList: ...
     length: int
     def addFromURI(self, src: str, weight: float | None = 1.0): ...
     def addFromString(self, string: str, weight: float | None = 1.0): ...
@@ -9603,7 +9882,8 @@ class SpeechSynthesis(EventTarget):
     def getVoices(self) -> Sequence[SpeechSynthesisVoice]: ...
 
 class SpeechSynthesisUtterance(EventTarget):
-    def New(self, text: str | None = None) -> SpeechSynthesisUtterance: ...
+    @classmethod
+    def new(self, text: str | None = None) -> SpeechSynthesisUtterance: ...
     text: str
     lang: str
     voice: SpeechSynthesisVoice | None
@@ -9619,7 +9899,8 @@ class SpeechSynthesisUtterance(EventTarget):
     onboundary: EventHandler
 
 class SpeechSynthesisEvent(Event):
-    def New(self, type: str, eventInitDict: SpeechSynthesisEventInit) -> SpeechSynthesisEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: SpeechSynthesisEventInit) -> SpeechSynthesisEvent: ...
     utterance: SpeechSynthesisUtterance
     charIndex: int
     charLength: int
@@ -9634,7 +9915,8 @@ class SpeechSynthesisEventInit(TypedDict, EventInit):
     name: NotRequired[str]
 
 class SpeechSynthesisErrorEvent(SpeechSynthesisEvent):
-    def New(self, type: str, eventInitDict: SpeechSynthesisErrorEventInit) -> SpeechSynthesisErrorEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: SpeechSynthesisErrorEventInit) -> SpeechSynthesisErrorEvent: ...
     error: SpeechSynthesisErrorCode
 
 class SpeechSynthesisErrorEventInit(TypedDict, SpeechSynthesisEventInit):
@@ -9655,7 +9937,8 @@ class StorageEstimate(TypedDict):
     quota: NotRequired[int]
 
 class ReadableStream:
-    def New(self, underlyingSource: object | None = None, strategy: QueuingStrategy | None = {}) -> ReadableStream: ...
+    @classmethod
+    def new(self, underlyingSource: object | None = None, strategy: QueuingStrategy | None = {}) -> ReadableStream: ...
     locked: bool
     def cancel(self, reason: Any | None = None) -> Awaitable[None]: ...
     def getReader(self, options: ReadableStreamGetReaderOptions | None = {}) -> ReadableStreamReader: ...
@@ -9691,7 +9974,8 @@ class ReadableStreamGenericReader:
     def cancel(self, reason: Any | None = None) -> Awaitable[None]: ...
 
 class ReadableStreamDefaultReader(ReadableStreamGenericReader):
-    def New(self, stream: ReadableStream) -> ReadableStreamDefaultReader: ...
+    @classmethod
+    def new(self, stream: ReadableStream) -> ReadableStreamDefaultReader: ...
     def read(self) -> Awaitable[ReadableStreamReadResult]: ...
     def releaseLock(self): ...
 
@@ -9700,7 +9984,8 @@ class ReadableStreamReadResult(TypedDict):
     done: NotRequired[bool]
 
 class ReadableStreamBYOBReader(ReadableStreamGenericReader):
-    def New(self, stream: ReadableStream) -> ReadableStreamBYOBReader: ...
+    @classmethod
+    def new(self, stream: ReadableStream) -> ReadableStreamBYOBReader: ...
     def read(self, view: ArrayBufferView) -> Awaitable[ReadableStreamReadResult]: ...
     def releaseLock(self): ...
 
@@ -9723,7 +10008,8 @@ class ReadableStreamBYOBRequest:
     def respondWithNewView(self, view: ArrayBufferView): ...
 
 class WritableStream:
-    def New(self, underlyingSink: object | None = None, strategy: QueuingStrategy | None = {}) -> WritableStream: ...
+    @classmethod
+    def new(self, underlyingSink: object | None = None, strategy: QueuingStrategy | None = {}) -> WritableStream: ...
     locked: bool
     def abort(self, reason: Any | None = None) -> Awaitable[None]: ...
     def close(self) -> Awaitable[None]: ...
@@ -9737,7 +10023,8 @@ class UnderlyingSink(TypedDict):
     type: NotRequired[Any]
 
 class WritableStreamDefaultWriter:
-    def New(self, stream: WritableStream) -> WritableStreamDefaultWriter: ...
+    @classmethod
+    def new(self, stream: WritableStream) -> WritableStreamDefaultWriter: ...
     closed: Awaitable[None]
     desiredSize: float | None
     ready: Awaitable[None]
@@ -9751,7 +10038,8 @@ class WritableStreamDefaultController:
     def error(self, e: Any | None = None): ...
 
 class TransformStream:
-    def New(self, transformer: object | None = None, writableStrategy: QueuingStrategy | None = {}, readableStrategy: QueuingStrategy | None = {}) -> TransformStream: ...
+    @classmethod
+    def new(self, transformer: object | None = None, writableStrategy: QueuingStrategy | None = {}, readableStrategy: QueuingStrategy | None = {}) -> TransformStream: ...
     readable: ReadableStream
     writable: WritableStream
 
@@ -9776,12 +10064,14 @@ class QueuingStrategyInit(TypedDict):
     highWaterMark: float
 
 class ByteLengthQueuingStrategy:
-    def New(self, init: QueuingStrategyInit) -> ByteLengthQueuingStrategy: ...
+    @classmethod
+    def new(self, init: QueuingStrategyInit) -> ByteLengthQueuingStrategy: ...
     highWaterMark: float
     size: Function
 
 class CountQueuingStrategy:
-    def New(self, init: QueuingStrategyInit) -> CountQueuingStrategy: ...
+    @classmethod
+    def new(self, init: QueuingStrategyInit) -> CountQueuingStrategy: ...
     highWaterMark: float
     size: Function
 
@@ -9823,7 +10113,8 @@ class TestutilsNamespace:
     def gc(self) -> Awaitable[None]: ...
 
 class TextDetector:
-    def New(self) -> TextDetector: ...
+    @classmethod
+    def new(self) -> TextDetector: ...
     def detect(self, image: ImageBitmapSource) -> Awaitable[Sequence[DetectedText]]: ...
 
 class DetectedText(TypedDict):
@@ -9849,7 +10140,8 @@ class TouchInit(TypedDict):
     touchType: NotRequired[TouchType]
 
 class Touch:
-    def New(self, touchInitDict: TouchInit) -> Touch: ...
+    @classmethod
+    def new(self, touchInitDict: TouchInit) -> Touch: ...
     identifier: int
     target: EventTarget
     screenX: float
@@ -9875,7 +10167,8 @@ class TouchEventInit(TypedDict, EventModifierInit):
     changedTouches: NotRequired[Sequence[Touch]]
 
 class TouchEvent(UIEvent):
-    def New(self, type: str, eventInitDict: TouchEventInit | None = {}) -> TouchEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: TouchEventInit | None = {}) -> TouchEvent: ...
     touches: TouchList
     targetTouches: TouchList
     changedTouches: TouchList
@@ -9947,7 +10240,8 @@ class NavigatorUA:
     userAgentData: NavigatorUAData
 
 class FocusEvent(UIEvent):
-    def New(self, type: str, eventInitDict: FocusEventInit | None = {}) -> FocusEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: FocusEventInit | None = {}) -> FocusEvent: ...
     relatedTarget: EventTarget | None
 
 class FocusEventInit(TypedDict, UIEventInit):
@@ -9970,7 +10264,8 @@ class EventModifierInit(TypedDict, UIEventInit):
     modifierSymbolLock: NotRequired[bool]
 
 class WheelEvent(MouseEvent):
-    def New(self, type: str, eventInitDict: WheelEventInit | None = {}) -> WheelEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: WheelEventInit | None = {}) -> WheelEvent: ...
     DOM_DELTA_PIXEL = 0x00
     DOM_DELTA_LINE = 0x01
     DOM_DELTA_PAGE = 0x02
@@ -9986,7 +10281,8 @@ class WheelEventInit(TypedDict, MouseEventInit):
     deltaMode: NotRequired[int]
 
 class KeyboardEvent(UIEvent):
-    def New(self, type: str, eventInitDict: KeyboardEventInit | None = {}) -> KeyboardEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: KeyboardEventInit | None = {}) -> KeyboardEvent: ...
     DOM_KEY_LOCATION_STANDARD = 0x00
     DOM_KEY_LOCATION_LEFT = 0x01
     DOM_KEY_LOCATION_RIGHT = 0x02
@@ -10015,7 +10311,8 @@ class KeyboardEventInit(TypedDict, EventModifierInit, TypedDict):
     keyCode: NotRequired[int]
 
 class CompositionEvent(UIEvent):
-    def New(self, type: str, eventInitDict: CompositionEventInit | None = {}) -> CompositionEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: CompositionEventInit | None = {}) -> CompositionEvent: ...
     data: str
     def initCompositionEvent(self, typeArg: str, bubblesArg: bool | None = false, cancelableArg: bool | None = false, viewArg: WindowProxy | None = None, dataArg: str | None = ""): ...
 
@@ -10034,7 +10331,8 @@ class MutationEvent(Event):
     def initMutationEvent(self, typeArg: str, bubblesArg: bool | None = false, cancelableArg: bool | None = false, relatedNodeArg: Node | None = None, prevValueArg: str | None = "", newValueArg: str | None = "", attrNameArg: str | None = "", attrChangeArg: int | None = 0): ...
 
 class URLSearchParams:
-    def New(self, init: Sequence[Sequence[USVString]] | USVString | USVString | None = "") -> URLSearchParams: ...
+    @classmethod
+    def new(self, init: Sequence[Sequence[USVString]] | USVString | USVString | None = "") -> URLSearchParams: ...
     def append(self, name: USVString, value: USVString): ...
     def delete(self, name: USVString): ...
     def get(self, name: USVString) -> USVString | None: ...
@@ -10045,9 +10343,11 @@ class URLSearchParams:
 
 class URLPattern:
     @overload
-    def New(self, input: URLPatternInput, baseURL: USVString, options: URLPatternOptions | None = {}) -> URLPattern: ...
+    @classmethod
+    def new(self, input: URLPatternInput, baseURL: USVString, options: URLPatternOptions | None = {}) -> URLPattern: ...
     @overload
-    def New(self, input: URLPatternInput | None = {}, options: URLPatternOptions | None = {}) -> URLPattern: ...
+    @classmethod
+    def new(self, input: URLPatternInput | None = {}, options: URLPatternOptions | None = {}) -> URLPattern: ...
     def test(self, input: URLPatternInput | None = {}, baseURL: USVString | None = None) -> bool: ...
     def exec(self, input: URLPatternInput | None = {}, baseURL: USVString | None = None) -> URLPatternResult | None: ...
     protocol: USVString
@@ -10099,7 +10399,8 @@ class PerformanceMeasureOptions(TypedDict):
     end: NotRequired[str | DOMHighResTimeStamp]
 
 class PerformanceMark(PerformanceEntry):
-    def New(self, markName: str, markOptions: PerformanceMarkOptions | None = {}) -> PerformanceMark: ...
+    @classmethod
+    def new(self, markName: str, markOptions: PerformanceMarkOptions | None = {}) -> PerformanceMark: ...
     detail: Any
 
 class PerformanceMeasure(PerformanceEntry):
@@ -10199,10 +10500,12 @@ class ModuleImportDescriptor(TypedDict):
     kind: ImportExportKind
 
 class Module:
-    def New(self, bytes: BufferSource) -> Module: ...
+    @classmethod
+    def new(self, bytes: BufferSource) -> Module: ...
 
 class Instance:
-    def New(self, module: Module, importObject: object | None = None) -> Instance: ...
+    @classmethod
+    def new(self, module: Module, importObject: object | None = None) -> Instance: ...
     exports: object
 
 class MemoryDescriptor(TypedDict):
@@ -10210,7 +10513,8 @@ class MemoryDescriptor(TypedDict):
     maximum: NotRequired[int]
 
 class Memory:
-    def New(self, descriptor: MemoryDescriptor) -> Memory: ...
+    @classmethod
+    def new(self, descriptor: MemoryDescriptor) -> Memory: ...
     def grow(self, delta: int) -> int: ...
     buffer: ArrayBuffer
 
@@ -10220,7 +10524,8 @@ class TableDescriptor(TypedDict):
     maximum: NotRequired[int]
 
 class Table:
-    def New(self, descriptor: TableDescriptor, value: Any | None = None) -> Table: ...
+    @classmethod
+    def new(self, descriptor: TableDescriptor, value: Any | None = None) -> Table: ...
     def grow(self, delta: int, value: Any | None = None) -> int: ...
     def get(self, index: int) -> Any: ...
     def set(self, index: int, value: Any | None = None): ...
@@ -10231,12 +10536,14 @@ class GlobalDescriptor(TypedDict):
     mutable: NotRequired[bool]
 
 class Global:
-    def New(self, descriptor: GlobalDescriptor, v: Any | None = None) -> Global: ...
+    @classmethod
+    def new(self, descriptor: GlobalDescriptor, v: Any | None = None) -> Global: ...
     def valueOf(self) -> Any: ...
     value: Any
 
 class Animation(EventTarget):
-    def New(self, effect: AnimationEffect | None = None, timeline: AnimationTimeline | None = None) -> Animation: ...
+    @classmethod
+    def new(self, effect: AnimationEffect | None = None, timeline: AnimationTimeline | None = None) -> Animation: ...
     startTime: CSSNumberish | None
     currentTime: CSSNumberish | None
     id: str
@@ -10303,7 +10610,8 @@ class ComputedEffectTiming(TypedDict, TypedDict, EffectTiming):
     currentIteration: NotRequired[float | None]
 
 class GroupEffect:
-    def New(self, children: Sequence[AnimationEffect], timing: float | EffectTiming | None = {}) -> GroupEffect: ...
+    @classmethod
+    def new(self, children: Sequence[AnimationEffect], timing: float | EffectTiming | None = {}) -> GroupEffect: ...
     children: AnimationNodeList
     firstChild: AnimationEffect | None
     lastChild: AnimationEffect | None
@@ -10315,14 +10623,17 @@ class AnimationNodeList:
     length: int
 
 class SequenceEffect(GroupEffect):
-    def New(self, children: Sequence[AnimationEffect], timing: float | EffectTiming | None = {}) -> SequenceEffect: ...
+    @classmethod
+    def new(self, children: Sequence[AnimationEffect], timing: float | EffectTiming | None = {}) -> SequenceEffect: ...
     def clone(self) -> SequenceEffect: ...
 
 class KeyframeEffect(AnimationEffect):
     @overload
-    def New(self, target: Element | None, keyframes: object | None, options: float | KeyframeEffectOptions | None = {}) -> KeyframeEffect: ...
+    @classmethod
+    def new(self, target: Element | None, keyframes: object | None, options: float | KeyframeEffectOptions | None = {}) -> KeyframeEffect: ...
     @overload
-    def New(self, source: KeyframeEffect) -> KeyframeEffect: ...
+    @classmethod
+    def new(self, source: KeyframeEffect) -> KeyframeEffect: ...
     iterationComposite: IterationCompositeOperation
     target: Element | None
     pseudoElement: CSSOMString | None
@@ -10336,7 +10647,8 @@ class KeyframeEffectOptions(TypedDict, TypedDict, EffectTiming):
     pseudoElement: NotRequired[CSSOMString | None]
 
 class AnimationPlaybackEvent(Event):
-    def New(self, type: str, eventInitDict: AnimationPlaybackEventInit | None = {}) -> AnimationPlaybackEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: AnimationPlaybackEventInit | None = {}) -> AnimationPlaybackEvent: ...
     currentTime: CSSNumberish | None
     timelineTime: CSSNumberish | None
 
@@ -10348,7 +10660,8 @@ class DocumentTimelineOptions(TypedDict):
     originTime: NotRequired[DOMHighResTimeStamp]
 
 class DocumentTimeline(AnimationTimeline):
-    def New(self, options: DocumentTimelineOptions | None = {}) -> DocumentTimeline: ...
+    @classmethod
+    def new(self, options: DocumentTimelineOptions | None = {}) -> DocumentTimeline: ...
 
 class BaseComputedKeyframe(TypedDict):
     offset: NotRequired[float | None]
@@ -10434,7 +10747,8 @@ class BluetoothPermissionResult(PermissionStatus):
     devices: Sequence[BluetoothDevice]
 
 class ValueEvent(Event):
-    def New(self, type: str, initDict: ValueEventInit | None = {}) -> ValueEvent: ...
+    @classmethod
+    def new(self, type: str, initDict: ValueEventInit | None = {}) -> ValueEvent: ...
     value: Any
 
 class ValueEventInit(TypedDict, EventInit):
@@ -10456,7 +10770,8 @@ class BluetoothManufacturerDataMap: ...
 class BluetoothServiceDataMap: ...
 
 class BluetoothAdvertisingEvent(Event):
-    def New(self, type: str, init: BluetoothAdvertisingEventInit) -> BluetoothAdvertisingEvent: ...
+    @classmethod
+    def new(self, type: str, init: BluetoothAdvertisingEventInit) -> BluetoothAdvertisingEvent: ...
     device: BluetoothDevice
     uuids: Sequence[UUID]
     name: str | None
@@ -10569,14 +10884,16 @@ class Lock:
     mode: LockMode
 
 class NDEFMessage:
-    def New(self, messageInit: NDEFMessageInit) -> NDEFMessage: ...
+    @classmethod
+    def new(self, messageInit: NDEFMessageInit) -> NDEFMessage: ...
     records: Sequence[NDEFRecord]
 
 class NDEFMessageInit(TypedDict):
     records: Sequence[NDEFRecordInit]
 
 class NDEFRecord:
-    def New(self, recordInit: NDEFRecordInit) -> NDEFRecord: ...
+    @classmethod
+    def new(self, recordInit: NDEFRecordInit) -> NDEFRecord: ...
     recordType: USVString
     mediaType: USVString | None
     id: USVString | None
@@ -10594,7 +10911,8 @@ class NDEFRecordInit(TypedDict):
     data: NotRequired[Any]
 
 class NDEFReader(EventTarget):
-    def New(self) -> NDEFReader: ...
+    @classmethod
+    def new(self) -> NDEFReader: ...
     onreading: EventHandler
     onreadingerror: EventHandler
     def scan(self, options: NDEFScanOptions | None = {}) -> Awaitable[None]: ...
@@ -10602,7 +10920,8 @@ class NDEFReader(EventTarget):
     def makeReadOnly(self, options: NDEFMakeReadOnlyOptions | None = {}) -> Awaitable[None]: ...
 
 class NDEFReadingEvent(Event):
-    def New(self, type: str, readingEventInitDict: NDEFReadingEventInit) -> NDEFReadingEvent: ...
+    @classmethod
+    def new(self, type: str, readingEventInitDict: NDEFReadingEventInit) -> NDEFReadingEvent: ...
     serialNumber: str
     message: NDEFMessage
 
@@ -10661,7 +10980,8 @@ class BaseAudioContext(EventTarget):
     def decodeAudioData(self, audioData: ArrayBuffer, successCallback: DecodeSuccessCallback | None = None, errorCallback: DecodeErrorCallback | None = None) -> Awaitable[AudioBuffer]: ...
 
 class AudioContext(BaseAudioContext):
-    def New(self, contextOptions: AudioContextOptions | None = {}) -> AudioContext: ...
+    @classmethod
+    def new(self, contextOptions: AudioContextOptions | None = {}) -> AudioContext: ...
     baseLatency: float
     outputLatency: float
     sinkId: str | AudioSinkInfo
@@ -10701,7 +11021,8 @@ class AudioRenderCapacityOptions(TypedDict):
     updateInterval: NotRequired[float]
 
 class AudioRenderCapacityEvent(Event):
-    def New(self, type: str, eventInitDict: AudioRenderCapacityEventInit | None = {}) -> AudioRenderCapacityEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: AudioRenderCapacityEventInit | None = {}) -> AudioRenderCapacityEvent: ...
     timestamp: float
     averageLoad: float
     peakLoad: float
@@ -10715,9 +11036,11 @@ class AudioRenderCapacityEventInit(TypedDict, EventInit):
 
 class OfflineAudioContext(BaseAudioContext):
     @overload
-    def New(self, contextOptions: OfflineAudioContextOptions) -> OfflineAudioContext: ...
+    @classmethod
+    def new(self, contextOptions: OfflineAudioContextOptions) -> OfflineAudioContext: ...
     @overload
-    def New(self, numberOfChannels: int, length: int, sampleRate: float) -> OfflineAudioContext: ...
+    @classmethod
+    def new(self, numberOfChannels: int, length: int, sampleRate: float) -> OfflineAudioContext: ...
     def startRendering(self) -> Awaitable[AudioBuffer]: ...
     def resume(self) -> Awaitable[None]: ...
     def suspend(self, suspendTime: float) -> Awaitable[None]: ...
@@ -10730,14 +11053,16 @@ class OfflineAudioContextOptions(TypedDict):
     sampleRate: float
 
 class OfflineAudioCompletionEvent(Event):
-    def New(self, type: str, eventInitDict: OfflineAudioCompletionEventInit) -> OfflineAudioCompletionEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: OfflineAudioCompletionEventInit) -> OfflineAudioCompletionEvent: ...
     renderedBuffer: AudioBuffer
 
 class OfflineAudioCompletionEventInit(TypedDict, EventInit):
     renderedBuffer: AudioBuffer
 
 class AudioBuffer:
-    def New(self, options: AudioBufferOptions) -> AudioBuffer: ...
+    @classmethod
+    def new(self, options: AudioBufferOptions) -> AudioBuffer: ...
     sampleRate: float
     length: int
     duration: float
@@ -10802,7 +11127,8 @@ class AudioScheduledSourceNode(AudioNode):
     def stop(self, when: float | None = 0): ...
 
 class AnalyserNode(AudioNode):
-    def New(self, context: BaseAudioContext, options: AnalyserOptions | None = {}) -> AnalyserNode: ...
+    @classmethod
+    def new(self, context: BaseAudioContext, options: AnalyserOptions | None = {}) -> AnalyserNode: ...
     def getFloatFrequencyData(self, array: Float32Array): ...
     def getByteFrequencyData(self, array: Uint8Array): ...
     def getFloatTimeDomainData(self, array: Float32Array): ...
@@ -10820,7 +11146,8 @@ class AnalyserOptions(TypedDict, AudioNodeOptions):
     smoothingTimeConstant: NotRequired[float]
 
 class AudioBufferSourceNode(AudioScheduledSourceNode):
-    def New(self, context: BaseAudioContext, options: AudioBufferSourceOptions | None = {}) -> AudioBufferSourceNode: ...
+    @classmethod
+    def new(self, context: BaseAudioContext, options: AudioBufferSourceOptions | None = {}) -> AudioBufferSourceNode: ...
     buffer: AudioBuffer | None
     playbackRate: AudioParam
     detune: AudioParam
@@ -10854,7 +11181,8 @@ class AudioListener:
     def setOrientation(self, x: float, y: float, z: float, xUp: float, yUp: float, zUp: float): ...
 
 class AudioProcessingEvent(Event):
-    def New(self, type: str, eventInitDict: AudioProcessingEventInit) -> AudioProcessingEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: AudioProcessingEventInit) -> AudioProcessingEvent: ...
     playbackTime: float
     inputBuffer: AudioBuffer
     outputBuffer: AudioBuffer
@@ -10865,7 +11193,8 @@ class AudioProcessingEventInit(TypedDict, EventInit):
     outputBuffer: AudioBuffer
 
 class BiquadFilterNode(AudioNode):
-    def New(self, context: BaseAudioContext, options: BiquadFilterOptions | None = {}) -> BiquadFilterNode: ...
+    @classmethod
+    def new(self, context: BaseAudioContext, options: BiquadFilterOptions | None = {}) -> BiquadFilterNode: ...
     type: BiquadFilterType
     frequency: AudioParam
     detune: AudioParam
@@ -10881,26 +11210,30 @@ class BiquadFilterOptions(TypedDict, AudioNodeOptions):
     gain: NotRequired[float]
 
 class ChannelMergerNode(AudioNode):
-    def New(self, context: BaseAudioContext, options: ChannelMergerOptions | None = {}) -> ChannelMergerNode: ...
+    @classmethod
+    def new(self, context: BaseAudioContext, options: ChannelMergerOptions | None = {}) -> ChannelMergerNode: ...
 
 class ChannelMergerOptions(TypedDict, AudioNodeOptions):
     numberOfInputs: NotRequired[int]
 
 class ChannelSplitterNode(AudioNode):
-    def New(self, context: BaseAudioContext, options: ChannelSplitterOptions | None = {}) -> ChannelSplitterNode: ...
+    @classmethod
+    def new(self, context: BaseAudioContext, options: ChannelSplitterOptions | None = {}) -> ChannelSplitterNode: ...
 
 class ChannelSplitterOptions(TypedDict, AudioNodeOptions):
     numberOfOutputs: NotRequired[int]
 
 class ConstantSourceNode(AudioScheduledSourceNode):
-    def New(self, context: BaseAudioContext, options: ConstantSourceOptions | None = {}) -> ConstantSourceNode: ...
+    @classmethod
+    def new(self, context: BaseAudioContext, options: ConstantSourceOptions | None = {}) -> ConstantSourceNode: ...
     offset: AudioParam
 
 class ConstantSourceOptions(TypedDict):
     offset: NotRequired[float]
 
 class ConvolverNode(AudioNode):
-    def New(self, context: BaseAudioContext, options: ConvolverOptions | None = {}) -> ConvolverNode: ...
+    @classmethod
+    def new(self, context: BaseAudioContext, options: ConvolverOptions | None = {}) -> ConvolverNode: ...
     buffer: AudioBuffer | None
     normalize: bool
 
@@ -10909,7 +11242,8 @@ class ConvolverOptions(TypedDict, AudioNodeOptions):
     disableNormalization: NotRequired[bool]
 
 class DelayNode(AudioNode):
-    def New(self, context: BaseAudioContext, options: DelayOptions | None = {}) -> DelayNode: ...
+    @classmethod
+    def new(self, context: BaseAudioContext, options: DelayOptions | None = {}) -> DelayNode: ...
     delayTime: AudioParam
 
 class DelayOptions(TypedDict, AudioNodeOptions):
@@ -10917,7 +11251,8 @@ class DelayOptions(TypedDict, AudioNodeOptions):
     delayTime: NotRequired[float]
 
 class DynamicsCompressorNode(AudioNode):
-    def New(self, context: BaseAudioContext, options: DynamicsCompressorOptions | None = {}) -> DynamicsCompressorNode: ...
+    @classmethod
+    def new(self, context: BaseAudioContext, options: DynamicsCompressorOptions | None = {}) -> DynamicsCompressorNode: ...
     threshold: AudioParam
     knee: AudioParam
     ratio: AudioParam
@@ -10933,14 +11268,16 @@ class DynamicsCompressorOptions(TypedDict, AudioNodeOptions):
     threshold: NotRequired[float]
 
 class GainNode(AudioNode):
-    def New(self, context: BaseAudioContext, options: GainOptions | None = {}) -> GainNode: ...
+    @classmethod
+    def new(self, context: BaseAudioContext, options: GainOptions | None = {}) -> GainNode: ...
     gain: AudioParam
 
 class GainOptions(TypedDict, AudioNodeOptions):
     gain: NotRequired[float]
 
 class IIRFilterNode(AudioNode):
-    def New(self, context: BaseAudioContext, options: IIRFilterOptions) -> IIRFilterNode: ...
+    @classmethod
+    def new(self, context: BaseAudioContext, options: IIRFilterOptions) -> IIRFilterNode: ...
     def getFrequencyResponse(self, frequencyHz: Float32Array, magResponse: Float32Array, phaseResponse: Float32Array): ...
 
 class IIRFilterOptions(TypedDict, AudioNodeOptions):
@@ -10948,31 +11285,36 @@ class IIRFilterOptions(TypedDict, AudioNodeOptions):
     feedback: Sequence[float]
 
 class MediaElementAudioSourceNode(AudioNode):
-    def New(self, context: AudioContext, options: MediaElementAudioSourceOptions) -> MediaElementAudioSourceNode: ...
+    @classmethod
+    def new(self, context: AudioContext, options: MediaElementAudioSourceOptions) -> MediaElementAudioSourceNode: ...
     mediaElement: HTMLMediaElement
 
 class MediaElementAudioSourceOptions(TypedDict):
     mediaElement: HTMLMediaElement
 
 class MediaStreamAudioDestinationNode(AudioNode):
-    def New(self, context: AudioContext, options: AudioNodeOptions | None = {}) -> MediaStreamAudioDestinationNode: ...
+    @classmethod
+    def new(self, context: AudioContext, options: AudioNodeOptions | None = {}) -> MediaStreamAudioDestinationNode: ...
     stream: MediaStream
 
 class MediaStreamAudioSourceNode(AudioNode):
-    def New(self, context: AudioContext, options: MediaStreamAudioSourceOptions) -> MediaStreamAudioSourceNode: ...
+    @classmethod
+    def new(self, context: AudioContext, options: MediaStreamAudioSourceOptions) -> MediaStreamAudioSourceNode: ...
     mediaStream: MediaStream
 
 class MediaStreamAudioSourceOptions(TypedDict):
     mediaStream: MediaStream
 
 class MediaStreamTrackAudioSourceNode(AudioNode):
-    def New(self, context: AudioContext, options: MediaStreamTrackAudioSourceOptions) -> MediaStreamTrackAudioSourceNode: ...
+    @classmethod
+    def new(self, context: AudioContext, options: MediaStreamTrackAudioSourceOptions) -> MediaStreamTrackAudioSourceNode: ...
 
 class MediaStreamTrackAudioSourceOptions(TypedDict):
     mediaStreamTrack: MediaStreamTrack
 
 class OscillatorNode(AudioScheduledSourceNode):
-    def New(self, context: BaseAudioContext, options: OscillatorOptions | None = {}) -> OscillatorNode: ...
+    @classmethod
+    def new(self, context: BaseAudioContext, options: OscillatorOptions | None = {}) -> OscillatorNode: ...
     type: OscillatorType
     frequency: AudioParam
     detune: AudioParam
@@ -10985,7 +11327,8 @@ class OscillatorOptions(TypedDict, AudioNodeOptions):
     periodicWave: NotRequired[PeriodicWave]
 
 class PannerNode(AudioNode):
-    def New(self, context: BaseAudioContext, options: PannerOptions | None = {}) -> PannerNode: ...
+    @classmethod
+    def new(self, context: BaseAudioContext, options: PannerOptions | None = {}) -> PannerNode: ...
     panningModel: PanningModelType
     positionX: AudioParam
     positionY: AudioParam
@@ -11020,7 +11363,8 @@ class PannerOptions(TypedDict, AudioNodeOptions):
     coneOuterGain: NotRequired[float]
 
 class PeriodicWave:
-    def New(self, context: BaseAudioContext, options: PeriodicWaveOptions | None = {}) -> PeriodicWave: ...
+    @classmethod
+    def new(self, context: BaseAudioContext, options: PeriodicWaveOptions | None = {}) -> PeriodicWave: ...
 
 class PeriodicWaveConstraints(TypedDict):
     disableNormalization: NotRequired[bool]
@@ -11034,14 +11378,16 @@ class ScriptProcessorNode(AudioNode):
     bufferSize: int
 
 class StereoPannerNode(AudioNode):
-    def New(self, context: BaseAudioContext, options: StereoPannerOptions | None = {}) -> StereoPannerNode: ...
+    @classmethod
+    def new(self, context: BaseAudioContext, options: StereoPannerOptions | None = {}) -> StereoPannerNode: ...
     pan: AudioParam
 
 class StereoPannerOptions(TypedDict, AudioNodeOptions):
     pan: NotRequired[float]
 
 class WaveShaperNode(AudioNode):
-    def New(self, context: BaseAudioContext, options: WaveShaperOptions | None = {}) -> WaveShaperNode: ...
+    @classmethod
+    def new(self, context: BaseAudioContext, options: WaveShaperOptions | None = {}) -> WaveShaperNode: ...
     curve: Float32Array
     oversample: OverSampleType
 
@@ -11062,7 +11408,8 @@ class AudioWorkletGlobalScope(WorkletGlobalScope):
 class AudioParamMap: ...
 
 class AudioWorkletNode(AudioNode):
-    def New(self, context: BaseAudioContext, name: str, options: AudioWorkletNodeOptions | None = {}) -> AudioWorkletNode: ...
+    @classmethod
+    def new(self, context: BaseAudioContext, name: str, options: AudioWorkletNodeOptions | None = {}) -> AudioWorkletNode: ...
     parameters: AudioParamMap
     port: MessagePort
     onprocessorerror: EventHandler
@@ -11075,7 +11422,8 @@ class AudioWorkletNodeOptions(TypedDict, AudioNodeOptions):
     processorOptions: NotRequired[object]
 
 class AudioWorkletProcessor:
-    def New(self) -> AudioWorkletProcessor: ...
+    @classmethod
+    def new(self) -> AudioWorkletProcessor: ...
     port: MessagePort
 
 class AudioParamDescriptor(TypedDict):
@@ -11305,7 +11653,8 @@ class OpusEncoderConfig(TypedDict):
     usedtx: NotRequired[bool]
 
 class AudioDecoder:
-    def New(self, init: AudioDecoderInit) -> AudioDecoder: ...
+    @classmethod
+    def new(self, init: AudioDecoderInit) -> AudioDecoder: ...
     state: CodecState
     decodeQueueSize: int
     ondequeue: EventHandler
@@ -11320,7 +11669,8 @@ class AudioDecoderInit(TypedDict):
     error: WebCodecsErrorCallback
 
 class VideoDecoder:
-    def New(self, init: VideoDecoderInit) -> VideoDecoder: ...
+    @classmethod
+    def new(self, init: VideoDecoderInit) -> VideoDecoder: ...
     state: CodecState
     decodeQueueSize: int
     ondequeue: EventHandler
@@ -11335,7 +11685,8 @@ class VideoDecoderInit(TypedDict):
     error: WebCodecsErrorCallback
 
 class AudioEncoder:
-    def New(self, init: AudioEncoderInit) -> AudioEncoder: ...
+    @classmethod
+    def new(self, init: AudioEncoderInit) -> AudioEncoder: ...
     state: CodecState
     encodeQueueSize: int
     ondequeue: EventHandler
@@ -11353,7 +11704,8 @@ class EncodedAudioChunkMetadata(TypedDict):
     decoderConfig: NotRequired[AudioDecoderConfig]
 
 class VideoEncoder:
-    def New(self, init: VideoEncoderInit) -> VideoEncoder: ...
+    @classmethod
+    def new(self, init: VideoEncoderInit) -> VideoEncoder: ...
     state: CodecState
     encodeQueueSize: int
     ondequeue: EventHandler
@@ -11412,7 +11764,8 @@ class VideoEncoderEncodeOptions(TypedDict):
     keyFrame: NotRequired[bool]
 
 class EncodedAudioChunk:
-    def New(self, init: EncodedAudioChunkInit) -> EncodedAudioChunk: ...
+    @classmethod
+    def new(self, init: EncodedAudioChunkInit) -> EncodedAudioChunk: ...
     type: EncodedAudioChunkType
     timestamp: int
     duration: int | None
@@ -11426,7 +11779,8 @@ class EncodedAudioChunkInit(TypedDict):
     data: BufferSource
 
 class EncodedVideoChunk:
-    def New(self, init: EncodedVideoChunkInit) -> EncodedVideoChunk: ...
+    @classmethod
+    def new(self, init: EncodedVideoChunkInit) -> EncodedVideoChunk: ...
     type: EncodedVideoChunkType
     timestamp: int
     duration: int | None
@@ -11440,7 +11794,8 @@ class EncodedVideoChunkInit(TypedDict):
     data: BufferSource
 
 class AudioData:
-    def New(self, init: AudioDataInit) -> AudioData: ...
+    @classmethod
+    def new(self, init: AudioDataInit) -> AudioData: ...
     format: AudioSampleFormat | None
     sampleRate: float
     numberOfFrames: int
@@ -11468,9 +11823,11 @@ class AudioDataCopyToOptions(TypedDict):
 
 class VideoFrame:
     @overload
-    def New(self, image: CanvasImageSource, init: VideoFrameInit | None = {}) -> VideoFrame: ...
+    @classmethod
+    def new(self, image: CanvasImageSource, init: VideoFrameInit | None = {}) -> VideoFrame: ...
     @overload
-    def New(self, data: BufferSource, init: VideoFrameBufferInit) -> VideoFrame: ...
+    @classmethod
+    def new(self, data: BufferSource, init: VideoFrameBufferInit) -> VideoFrame: ...
     format: VideoPixelFormat | None
     codedWidth: int
     codedHeight: int
@@ -11519,7 +11876,8 @@ class PlaneLayout(TypedDict):
     stride: int
 
 class VideoColorSpace:
-    def New(self, init: VideoColorSpaceInit | None = {}) -> VideoColorSpace: ...
+    @classmethod
+    def new(self, init: VideoColorSpaceInit | None = {}) -> VideoColorSpace: ...
     primaries: VideoColorPrimaries | None
     transfer: VideoTransferCharacteristics | None
     matrix: VideoMatrixCoefficients | None
@@ -11533,7 +11891,8 @@ class VideoColorSpaceInit(TypedDict):
     fullRange: NotRequired[bool | None]
 
 class ImageDecoder:
-    def New(self, init: ImageDecoderInit) -> ImageDecoder: ...
+    @classmethod
+    def new(self, init: ImageDecoderInit) -> ImageDecoder: ...
     type: str
     complete: bool
     completed: Awaitable[None]
@@ -12068,7 +12427,8 @@ class WebGLRenderingContextOverloads:
 class WebGLRenderingContext(WebGLRenderingContextBase, WebGLRenderingContextOverloads): ...
 
 class WebGLContextEvent(Event):
-    def New(self, type: str, eventInit: WebGLContextEventInit | None = {}) -> WebGLContextEvent: ...
+    @classmethod
+    def new(self, type: str, eventInit: WebGLContextEventInit | None = {}) -> WebGLContextEvent: ...
     statusMessage: str
 
 class WebGLContextEventInit(TypedDict, EventInit):
@@ -12753,7 +13113,8 @@ class GPUCompilationInfo:
     messages: Sequence[GPUCompilationMessage]
 
 class GPUPipelineError(DOMException):
-    def New(self, message: str, options: GPUPipelineErrorInit) -> GPUPipelineError: ...
+    @classmethod
+    def new(self, message: str, options: GPUPipelineErrorInit) -> GPUPipelineError: ...
     reason: GPUPipelineErrorReason
 
 class GPUPipelineErrorInit(TypedDict):
@@ -13017,16 +13378,20 @@ class GPUError:
     message: str
 
 class GPUValidationError(GPUError):
-    def New(self, message: str) -> GPUValidationError: ...
+    @classmethod
+    def new(self, message: str) -> GPUValidationError: ...
 
 class GPUOutOfMemoryError(GPUError):
-    def New(self, message: str) -> GPUOutOfMemoryError: ...
+    @classmethod
+    def new(self, message: str) -> GPUOutOfMemoryError: ...
 
 class GPUInternalError(GPUError):
-    def New(self, message: str) -> GPUInternalError: ...
+    @classmethod
+    def new(self, message: str) -> GPUInternalError: ...
 
 class GPUUncapturedErrorEvent(Event):
-    def New(self, type: str, gpuUncapturedErrorEventInitDict: GPUUncapturedErrorEventInit) -> GPUUncapturedErrorEvent: ...
+    @classmethod
+    def new(self, type: str, gpuUncapturedErrorEventInitDict: GPUUncapturedErrorEventInit) -> GPUUncapturedErrorEvent: ...
     error: GPUError
 
 class GPUUncapturedErrorEventInit(TypedDict, EventInit):
@@ -13083,14 +13448,16 @@ class HIDDevice(EventTarget):
     def receiveFeatureReport(self, reportId: octet) -> Awaitable[DataView]: ...
 
 class HIDConnectionEvent(Event):
-    def New(self, type: str, eventInitDict: HIDConnectionEventInit) -> HIDConnectionEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: HIDConnectionEventInit) -> HIDConnectionEvent: ...
     device: HIDDevice
 
 class HIDConnectionEventInit(TypedDict, EventInit):
     device: HIDDevice
 
 class HIDInputReportEvent(Event):
-    def New(self, type: str, eventInitDict: HIDInputReportEventInit) -> HIDInputReportEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: HIDInputReportEventInit) -> HIDInputReportEvent: ...
     device: HIDDevice
     reportId: octet
     data: DataView
@@ -13144,7 +13511,8 @@ class HIDReportItem(TypedDict):
     strings: NotRequired[Sequence[str]]
 
 class DOMException:
-    def New(self, message: str | None = "", name: str | None = "Error") -> DOMException: ...
+    @classmethod
+    def new(self, message: str | None = "", name: str | None = "Error") -> DOMException: ...
     name: str
     message: str
     code: int
@@ -13211,14 +13579,16 @@ class MIDIOutput(MIDIPort):
     def clear(self): ...
 
 class MIDIMessageEvent(Event):
-    def New(self, type: str, eventInitDict: MIDIMessageEventInit | None = {}) -> MIDIMessageEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: MIDIMessageEventInit | None = {}) -> MIDIMessageEvent: ...
     data: Uint8Array
 
 class MIDIMessageEventInit(TypedDict, EventInit):
     data: NotRequired[Uint8Array]
 
 class MIDIConnectionEvent(Event):
-    def New(self, type: str, eventInitDict: MIDIConnectionEventInit | None = {}) -> MIDIConnectionEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: MIDIConnectionEventInit | None = {}) -> MIDIConnectionEvent: ...
     port: MIDIPort
 
 class MIDIConnectionEventInit(TypedDict, EventInit):
@@ -13271,7 +13641,8 @@ class MLBufferResourceView(TypedDict):
     size: NotRequired[int]
 
 class MLGraphBuilder:
-    def New(self, context: MLContext) -> MLGraphBuilder: ...
+    @classmethod
+    def new(self, context: MLContext) -> MLGraphBuilder: ...
     def input(self, name: str, desc: MLOperandDescriptor) -> MLOperand: ...
     @overload
     def constant(self, desc: MLOperandDescriptor, bufferView: MLBufferView) -> MLOperand: ...
@@ -13536,12 +13907,14 @@ class SFrameTransformOptions(TypedDict):
     role: NotRequired[SFrameTransformRole]
 
 class SFrameTransform(GenericTransformStream):
-    def New(self, options: SFrameTransformOptions | None = {}) -> SFrameTransform: ...
+    @classmethod
+    def new(self, options: SFrameTransformOptions | None = {}) -> SFrameTransform: ...
     def setEncryptionKey(self, key: CryptoKey, keyID: CryptoKeyID | None = None) -> Awaitable[None]: ...
     onerror: EventHandler
 
 class SFrameTransformErrorEvent(Event):
-    def New(self, type: str, eventInitDict: SFrameTransformErrorEventInit) -> SFrameTransformErrorEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: SFrameTransformErrorEventInit) -> SFrameTransformErrorEvent: ...
     errorType: SFrameTransformErrorEventType
     keyID: CryptoKeyID | None
     frame: Any
@@ -13589,7 +13962,8 @@ class RTCRtpScriptTransformer:
     def sendKeyFrameRequest(self) -> Awaitable[None]: ...
 
 class RTCRtpScriptTransform:
-    def New(self, worker: Worker, options: Any | None = None, transfer: Sequence[object] | None = None) -> RTCRtpScriptTransform: ...
+    @classmethod
+    def new(self, worker: Worker, options: Any | None = None, transfer: Sequence[object] | None = None) -> RTCRtpScriptTransform: ...
 
 class RTCIceParameters(TypedDict, TypedDict):
     iceLite: NotRequired[bool]
@@ -13601,7 +13975,8 @@ class RTCIceGatherOptions(TypedDict):
     iceServers: NotRequired[Sequence[RTCIceServer]]
 
 class RTCIceTransport(EventTarget):
-    def New(self) -> RTCIceTransport: ...
+    @classmethod
+    def new(self) -> RTCIceTransport: ...
     def gather(self, options: RTCIceGatherOptions | None = {}): ...
     def start(self, remoteParameters: RTCIceParameters | None = {}, role: RTCIceRole | None = "controlled"): ...
     def stop(self): ...
@@ -13644,7 +14019,8 @@ class RTCIdentityValidationResult(TypedDict):
     contents: str
 
 class RTCPeerConnection(EventTarget):
-    def New(self, configuration: RTCConfiguration | None = {}) -> RTCPeerConnection: ...
+    @classmethod
+    def new(self, configuration: RTCConfiguration | None = {}) -> RTCPeerConnection: ...
     def setIdentityProvider(self, provider: str, options: RTCIdentityProviderOptions | None = {}): ...
     def getIdentityAssertion(self) -> Awaitable[str]: ...
     peerIdentity: Awaitable[RTCIdentityAssertion]
@@ -13719,12 +14095,14 @@ class RTCIdentityProviderOptions(TypedDict):
     peerIdentity: NotRequired[str]
 
 class RTCIdentityAssertion:
-    def New(self, idp: str, name: str) -> RTCIdentityAssertion: ...
+    @classmethod
+    def new(self, idp: str, name: str) -> RTCIdentityAssertion: ...
     idp: str
     name: str
 
 class RTCError(DOMException):
-    def New(self, init: RTCErrorInit, message: str | None = "") -> RTCError: ...
+    @classmethod
+    def new(self, init: RTCErrorInit, message: str | None = "") -> RTCError: ...
     httpRequestStatusCode: int | None
     errorDetail: RTCErrorDetailType
     sdpLineNumber: int | None
@@ -14034,7 +14412,8 @@ class RTCOfferOptions(TypedDict, RTCOfferAnswerOptions, TypedDict):
 class RTCAnswerOptions(TypedDict, RTCOfferAnswerOptions): ...
 
 class RTCSessionDescription:
-    def New(self, descriptionInitDict: RTCSessionDescriptionInit) -> RTCSessionDescription: ...
+    @classmethod
+    def new(self, descriptionInitDict: RTCSessionDescriptionInit) -> RTCSessionDescription: ...
     type: RTCSdpType
     sdp: str
     def toJSON(self) -> object: ...
@@ -14048,7 +14427,8 @@ class RTCLocalSessionDescriptionInit(TypedDict):
     sdp: NotRequired[str]
 
 class RTCIceCandidate:
-    def New(self, candidateInitDict: RTCIceCandidateInit | None = {}) -> RTCIceCandidate: ...
+    @classmethod
+    def new(self, candidateInitDict: RTCIceCandidateInit | None = {}) -> RTCIceCandidate: ...
     candidate: str
     sdpMid: str | None
     sdpMLineIndex: int | None
@@ -14074,7 +14454,8 @@ class RTCIceCandidateInit(TypedDict):
     usernameFragment: NotRequired[str | None]
 
 class RTCPeerConnectionIceEvent(Event):
-    def New(self, type: str, eventInitDict: RTCPeerConnectionIceEventInit | None = {}) -> RTCPeerConnectionIceEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: RTCPeerConnectionIceEventInit | None = {}) -> RTCPeerConnectionIceEvent: ...
     candidate: RTCIceCandidate | None
     url: str | None
 
@@ -14083,7 +14464,8 @@ class RTCPeerConnectionIceEventInit(TypedDict, EventInit):
     url: NotRequired[str | None]
 
 class RTCPeerConnectionIceErrorEvent(Event):
-    def New(self, type: str, eventInitDict: RTCPeerConnectionIceErrorEventInit) -> RTCPeerConnectionIceErrorEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: RTCPeerConnectionIceErrorEventInit) -> RTCPeerConnectionIceErrorEvent: ...
     address: str | None
     port: int | None
     url: str
@@ -14175,7 +14557,8 @@ class RTCIceCandidatePair(TypedDict):
     remote: NotRequired[RTCIceCandidate]
 
 class RTCTrackEvent(Event):
-    def New(self, type: str, eventInitDict: RTCTrackEventInit) -> RTCTrackEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: RTCTrackEventInit) -> RTCTrackEvent: ...
     receiver: RTCRtpReceiver
     track: MediaStreamTrack
     streams: Sequence[MediaStream]
@@ -14195,7 +14578,8 @@ class RTCSctpTransport(EventTarget):
     onstatechange: EventHandler
 
 class RTCDataChannelEvent(Event):
-    def New(self, type: str, eventInitDict: RTCDataChannelEventInit) -> RTCDataChannelEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: RTCDataChannelEventInit) -> RTCDataChannelEvent: ...
     channel: RTCDataChannel
 
 class RTCDataChannelEventInit(TypedDict, EventInit):
@@ -14208,7 +14592,8 @@ class RTCDTMFSender(EventTarget):
     toneBuffer: str
 
 class RTCDTMFToneChangeEvent(Event):
-    def New(self, type: str, eventInitDict: RTCDTMFToneChangeEventInit | None = {}) -> RTCDTMFToneChangeEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: RTCDTMFToneChangeEventInit | None = {}) -> RTCDTMFToneChangeEvent: ...
     tone: str
 
 class RTCDTMFToneChangeEventInit(TypedDict, EventInit):
@@ -14222,14 +14607,16 @@ class RTCStats(TypedDict):
     id: str
 
 class RTCErrorEvent(Event):
-    def New(self, type: str, eventInitDict: RTCErrorEventInit) -> RTCErrorEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: RTCErrorEventInit) -> RTCErrorEvent: ...
     error: RTCError
 
 class RTCErrorEventInit(TypedDict, EventInit):
     error: RTCError
 
 class WebSocket(EventTarget):
-    def New(self, url: USVString, protocols: str | Sequence[str] | None = []) -> WebSocket: ...
+    @classmethod
+    def new(self, url: USVString, protocols: str | Sequence[str] | None = []) -> WebSocket: ...
     url: USVString
     CONNECTING = 0
     OPEN = 1
@@ -14248,7 +14635,8 @@ class WebSocket(EventTarget):
     def send(self, data: BufferSource | Blob | USVString): ...
 
 class CloseEvent(Event):
-    def New(self, type: str, eventInitDict: CloseEventInit | None = {}) -> CloseEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: CloseEventInit | None = {}) -> CloseEvent: ...
     wasClean: bool
     code: int
     reason: USVString
@@ -14268,7 +14656,8 @@ class WebTransportDatagramDuplexStream:
     outgoingHighWaterMark: int
 
 class WebTransport:
-    def New(self, url: USVString, options: WebTransportOptions | None = {}) -> WebTransport: ...
+    @classmethod
+    def new(self, url: USVString, options: WebTransportOptions | None = {}) -> WebTransport: ...
     def getStats(self) -> Awaitable[WebTransportStats]: ...
     ready: Awaitable[None]
     reliability: WebTransportReliabilityMode
@@ -14340,7 +14729,8 @@ class WebTransportBidirectionalStream:
     writable: WebTransportSendStream
 
 class WebTransportError(DOMException):
-    def New(self, init: WebTransportErrorInit | None = {}) -> WebTransportError: ...
+    @classmethod
+    def new(self, init: WebTransportErrorInit | None = {}) -> WebTransportError: ...
     source: WebTransportErrorSource
     streamErrorCode: octet | None
 
@@ -14369,36 +14759,43 @@ class USBConnectionEventInit(TypedDict, EventInit):
     device: USBDevice
 
 class USBConnectionEvent(Event):
-    def New(self, type: str, eventInitDict: USBConnectionEventInit) -> USBConnectionEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: USBConnectionEventInit) -> USBConnectionEvent: ...
     device: USBDevice
 
 class USBInTransferResult:
-    def New(self, status: USBTransferStatus, data: DataView | None = None) -> USBInTransferResult: ...
+    @classmethod
+    def new(self, status: USBTransferStatus, data: DataView | None = None) -> USBInTransferResult: ...
     data: DataView
     status: USBTransferStatus
 
 class USBOutTransferResult:
-    def New(self, status: USBTransferStatus, bytesWritten: int | None = 0) -> USBOutTransferResult: ...
+    @classmethod
+    def new(self, status: USBTransferStatus, bytesWritten: int | None = 0) -> USBOutTransferResult: ...
     bytesWritten: int
     status: USBTransferStatus
 
 class USBIsochronousInTransferPacket:
-    def New(self, status: USBTransferStatus, data: DataView | None = None) -> USBIsochronousInTransferPacket: ...
+    @classmethod
+    def new(self, status: USBTransferStatus, data: DataView | None = None) -> USBIsochronousInTransferPacket: ...
     data: DataView
     status: USBTransferStatus
 
 class USBIsochronousInTransferResult:
-    def New(self, packets: Sequence[USBIsochronousInTransferPacket], data: DataView | None = None) -> USBIsochronousInTransferResult: ...
+    @classmethod
+    def new(self, packets: Sequence[USBIsochronousInTransferPacket], data: DataView | None = None) -> USBIsochronousInTransferResult: ...
     data: DataView
     packets: Sequence[USBIsochronousInTransferPacket]
 
 class USBIsochronousOutTransferPacket:
-    def New(self, status: USBTransferStatus, bytesWritten: int | None = 0) -> USBIsochronousOutTransferPacket: ...
+    @classmethod
+    def new(self, status: USBTransferStatus, bytesWritten: int | None = 0) -> USBIsochronousOutTransferPacket: ...
     bytesWritten: int
     status: USBTransferStatus
 
 class USBIsochronousOutTransferResult:
-    def New(self, packets: Sequence[USBIsochronousOutTransferPacket]) -> USBIsochronousOutTransferResult: ...
+    @classmethod
+    def new(self, packets: Sequence[USBIsochronousOutTransferPacket]) -> USBIsochronousOutTransferResult: ...
     packets: Sequence[USBIsochronousOutTransferPacket]
 
 class USBDevice:
@@ -14443,20 +14840,23 @@ class USBControlTransferParameters(TypedDict):
     index: int
 
 class USBConfiguration:
-    def New(self, device: USBDevice, configurationValue: octet) -> USBConfiguration: ...
+    @classmethod
+    def new(self, device: USBDevice, configurationValue: octet) -> USBConfiguration: ...
     configurationValue: octet
     configurationName: str | None
     interfaces: Sequence[USBInterface]
 
 class USBInterface:
-    def New(self, configuration: USBConfiguration, interfaceNumber: octet) -> USBInterface: ...
+    @classmethod
+    def new(self, configuration: USBConfiguration, interfaceNumber: octet) -> USBInterface: ...
     interfaceNumber: octet
     alternate: USBAlternateInterface
     alternates: Sequence[USBAlternateInterface]
     claimed: bool
 
 class USBAlternateInterface:
-    def New(self, deviceInterface: USBInterface, alternateSetting: octet) -> USBAlternateInterface: ...
+    @classmethod
+    def new(self, deviceInterface: USBInterface, alternateSetting: octet) -> USBAlternateInterface: ...
     alternateSetting: octet
     interfaceClass: octet
     interfaceSubclass: octet
@@ -14465,7 +14865,8 @@ class USBAlternateInterface:
     endpoints: Sequence[USBEndpoint]
 
 class USBEndpoint:
-    def New(self, alternate: USBAlternateInterface, endpointNumber: octet, direction: USBDirection) -> USBEndpoint: ...
+    @classmethod
+    def new(self, alternate: USBAlternateInterface, endpointNumber: octet, direction: USBDirection) -> USBEndpoint: ...
     endpointNumber: octet
     direction: USBDirection
     type: USBEndpointType
@@ -14486,7 +14887,8 @@ class USBPermissionResult(PermissionStatus):
     devices: Sequence[USBDevice]
 
 class VTTCue(TextTrackCue):
-    def New(self, startTime: float, endTime: float, text: str) -> VTTCue: ...
+    @classmethod
+    def new(self, startTime: float, endTime: float, text: str) -> VTTCue: ...
     region: VTTRegion | None
     vertical: DirectionSetting
     snapToLines: bool
@@ -14500,7 +14902,8 @@ class VTTCue(TextTrackCue):
     def getCueAsHTML(self) -> DocumentFragment: ...
 
 class VTTRegion:
-    def New(self) -> VTTRegion: ...
+    @classmethod
+    def new(self) -> VTTRegion: ...
     id: str
     width: float
     lines: int
@@ -14586,9 +14989,11 @@ class XRRayDirectionInit(TypedDict):
 
 class XRRay:
     @overload
-    def New(self, origin: DOMPointInit | None = {}, direction: XRRayDirectionInit | None = {}) -> XRRay: ...
+    @classmethod
+    def new(self, origin: DOMPointInit | None = {}, direction: XRRayDirectionInit | None = {}) -> XRRay: ...
     @overload
-    def New(self, transform: XRRigidTransform) -> XRRay: ...
+    @classmethod
+    def new(self, transform: XRRigidTransform) -> XRRay: ...
     origin: DOMPointReadOnly
     direction: DOMPointReadOnly
     matrix: Float32Array
@@ -14640,7 +15045,8 @@ class XRViewport:
     height: int
 
 class XRRigidTransform:
-    def New(self, position: DOMPointInit | None = {}, orientation: DOMPointInit | None = {}) -> XRRigidTransform: ...
+    @classmethod
+    def new(self, position: DOMPointInit | None = {}, orientation: DOMPointInit | None = {}) -> XRRigidTransform: ...
     position: DOMPointReadOnly
     orientation: DOMPointReadOnly
     matrix: Float32Array
@@ -14669,7 +15075,8 @@ class XRWebGLLayerInit(TypedDict):
     framebufferScaleFactor: NotRequired[float]
 
 class XRWebGLLayer(XRLayer):
-    def New(self, session: XRSession, context: XRWebGLRenderingContext, layerInit: XRWebGLLayerInit | None = {}) -> XRWebGLLayer: ...
+    @classmethod
+    def new(self, session: XRSession, context: XRWebGLRenderingContext, layerInit: XRWebGLLayerInit | None = {}) -> XRWebGLLayer: ...
     antialias: bool
     ignoreDepthValues: bool
     fixedFoveation: float | None
@@ -14679,14 +15086,16 @@ class XRWebGLLayer(XRLayer):
     def getViewport(self, view: XRView) -> XRViewport | None: ...
 
 class XRSessionEvent(Event):
-    def New(self, type: str, eventInitDict: XRSessionEventInit) -> XRSessionEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: XRSessionEventInit) -> XRSessionEvent: ...
     session: XRSession
 
 class XRSessionEventInit(TypedDict, EventInit):
     session: XRSession
 
 class XRInputSourceEvent(Event):
-    def New(self, type: str, eventInitDict: XRInputSourceEventInit) -> XRInputSourceEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: XRInputSourceEventInit) -> XRInputSourceEvent: ...
     frame: XRFrame
     inputSource: XRInputSource
 
@@ -14695,7 +15104,8 @@ class XRInputSourceEventInit(TypedDict, EventInit):
     inputSource: XRInputSource
 
 class XRInputSourcesChangeEvent(Event):
-    def New(self, type: str, eventInitDict: XRInputSourcesChangeEventInit) -> XRInputSourcesChangeEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: XRInputSourcesChangeEventInit) -> XRInputSourcesChangeEvent: ...
     session: XRSession
     added: Sequence[XRInputSource]
     removed: Sequence[XRInputSource]
@@ -14706,7 +15116,8 @@ class XRInputSourcesChangeEventInit(TypedDict, EventInit):
     removed: Sequence[XRInputSource]
 
 class XRReferenceSpaceEvent(Event):
-    def New(self, type: str, eventInitDict: XRReferenceSpaceEventInit) -> XRReferenceSpaceEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: XRReferenceSpaceEventInit) -> XRReferenceSpaceEvent: ...
     referenceSpace: XRReferenceSpace
     transform: XRRigidTransform | None
 
@@ -14851,13 +15262,15 @@ class XRMediaEquirectLayerInit(TypedDict, XRMediaLayerInit):
     lowerVerticalAngle: NotRequired[float]
 
 class XRMediaBinding:
-    def New(self, session: XRSession) -> XRMediaBinding: ...
+    @classmethod
+    def new(self, session: XRSession) -> XRMediaBinding: ...
     def createQuadLayer(self, video: HTMLVideoElement, init: XRMediaQuadLayerInit | None = {}) -> XRQuadLayer: ...
     def createCylinderLayer(self, video: HTMLVideoElement, init: XRMediaCylinderLayerInit | None = {}) -> XRCylinderLayer: ...
     def createEquirectLayer(self, video: HTMLVideoElement, init: XRMediaEquirectLayerInit | None = {}) -> XREquirectLayer: ...
 
 class XRLayerEvent(Event):
-    def New(self, type: str, eventInitDict: XRLayerEventInit) -> XRLayerEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: XRLayerEventInit) -> XRLayerEvent: ...
     layer: XRLayer
 
 class XRLayerEventInit(TypedDict, EventInit):
@@ -14869,7 +15282,8 @@ class WindowControlsOverlay(EventTarget):
     ongeometrychange: EventHandler
 
 class WindowControlsOverlayGeometryChangeEvent(Event):
-    def New(self, type: str, eventInitDict: WindowControlsOverlayGeometryChangeEventInit) -> WindowControlsOverlayGeometryChangeEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: WindowControlsOverlayGeometryChangeEventInit) -> WindowControlsOverlayGeometryChangeEvent: ...
     titlebarAreaRect: DOMRect
     visible: bool
 
@@ -14905,7 +15319,8 @@ class XMLHttpRequestEventTarget(EventTarget):
 class XMLHttpRequestUpload(XMLHttpRequestEventTarget): ...
 
 class XMLHttpRequest(XMLHttpRequestEventTarget):
-    def New(self) -> XMLHttpRequest: ...
+    @classmethod
+    def new(self) -> XMLHttpRequest: ...
     onreadystatechange: EventHandler
     UNSENT = 0
     OPENED = 1
@@ -14935,7 +15350,8 @@ class XMLHttpRequest(XMLHttpRequestEventTarget):
     responseXML: Document | None
 
 class FormData:
-    def New(self, form: HTMLFormElement | None = None) -> FormData: ...
+    @classmethod
+    def new(self, form: HTMLFormElement | None = None) -> FormData: ...
     @overload
     def append(self, name: USVString, value: USVString): ...
     @overload
@@ -14950,7 +15366,8 @@ class FormData:
     def set(self, name: USVString, blobValue: Blob, filename: USVString | None = None): ...
 
 class ProgressEvent(Event):
-    def New(self, type: str, eventInitDict: ProgressEventInit | None = {}) -> ProgressEvent: ...
+    @classmethod
+    def new(self, type: str, eventInitDict: ProgressEventInit | None = {}) -> ProgressEvent: ...
     lengthComputable: bool
     loaded: int
     total: int
