@@ -1,21 +1,21 @@
 from __future__ import annotations
 
 _types_dict = {
-    'undefined': 'None',
-    'any': 'Any',
-    'DOMString': 'str',
-    'long': 'int',
-    'long long': 'int',
-    'unsigned long': 'int',
-    'unsigned long long': 'int',
-    'unsigned short': 'int',
-    'boolean': 'bool',
-    'double': 'float',
-    'unrestricted double': 'float',
-    'unrestricted float': 'float',
+    "undefined": "None",
+    "any": "Any",
+    "DOMString": "str",
+    "long": "int",
+    "long long": "int",
+    "unsigned long": "int",
+    "unsigned long long": "int",
+    "unsigned short": "int",
+    "boolean": "bool",
+    "double": "float",
+    "unrestricted double": "float",
+    "unrestricted float": "float",
     # generics
-    'sequence': 'Sequence',
-    'Promise': 'Awaitable'
+    "sequence": "Sequence",
+    "Promise": "Awaitable",
 }
 
 
@@ -24,7 +24,7 @@ def to_py_type(s) -> str:
 
 
 _values_dict = {
-    'null': 'None',
+    "null": "None",
 }
 
 
@@ -33,17 +33,17 @@ def to_py_value(s) -> str:
 
 
 reserved_keywords = {
-    'async',
-    'from',
-    'break',
-    'is',
-    'continue',
-    'assert',
-    'in',
+    "async",
+    "from",
+    "break",
+    "is",
+    "continue",
+    "assert",
+    "in",
 }
 
 
 def to_py_name(s) -> str:
     if s in reserved_keywords:
-        return s + '_'
+        return s + "_"
     return s

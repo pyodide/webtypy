@@ -8,10 +8,14 @@ from js_pyi.itertools import partition, groupby as groupby2, groupby
 
 
 def _fix_constructor(cl: GClass):
-    constructors = list(filter(lambda m: isinstance(m, GMethod) and m.name == 'constructor', cl.children))
+    constructors = list(
+        filter(
+            lambda m: isinstance(m, GMethod) and m.name == "constructor", cl.children
+        )
+    )
     for c in constructors:
         c: GMethod
-        c.name = 'new'
+        c.name = "new"
         c.returns = cl.name
         c.classmethod = True
         cl.children.remove(c)

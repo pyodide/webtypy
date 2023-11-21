@@ -51,11 +51,11 @@ def print_overloaded(files: List[Path] | None = None):
         sts = keep_python_producer(sts)
         sts = _keep_classes_with_overloads(sts)
         if len(sts) > 0:
-            print('=' * 50)
+            print("=" * 50)
             print(file)
             for cl in sts:
                 python_code = cl.to_python()
-                print('-' * 50)
+                print("-" * 50)
                 print(python_code)
 
 
@@ -68,9 +68,9 @@ def print_unhandled(files: List[Path] | None = None) -> bool:
         sts = keep_unhandled(sts)
         if len(sts) > 0:
             python_code = s_statements(sts)
-            print('=' * 50)
+            print("=" * 50)
             print(file)
-            print('-' * 50)
+            print("-" * 50)
             print(python_code)
 
 
@@ -78,5 +78,5 @@ def main():
     print_overloaded()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

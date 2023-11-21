@@ -1,17 +1,51 @@
 from __future__ import annotations
 
 import widlparser
-from widlparser import Interface, InterfaceMember, Construct, TypeWithExtendedAttributes, Argument, UnionType, \
-    Attribute, AttributeRest, SingleType, AnyType, NonAnyType, PrimitiveType, Symbol, TypeIdentifier, Default, Type, \
-    TypeSuffix, Operation, UnionMemberType, UnsignedIntegerType, UnrestrictedFloatType, Enum, EnumValue, \
-    IncludesStatement, Typedef, ExtendedAttribute, Mixin, MixinMember, MixinAttribute, Constructor, Dictionary, \
-    DictionaryMember, Inheritance, Namespace, NamespaceMember, Stringifier, Const
+from widlparser import (
+    Interface,
+    InterfaceMember,
+    Construct,
+    TypeWithExtendedAttributes,
+    Argument,
+    UnionType,
+    Attribute,
+    AttributeRest,
+    SingleType,
+    AnyType,
+    NonAnyType,
+    PrimitiveType,
+    Symbol,
+    TypeIdentifier,
+    Default,
+    Type,
+    TypeSuffix,
+    Operation,
+    UnionMemberType,
+    UnsignedIntegerType,
+    UnrestrictedFloatType,
+    Enum,
+    EnumValue,
+    IncludesStatement,
+    Typedef,
+    ExtendedAttribute,
+    Mixin,
+    MixinMember,
+    MixinAttribute,
+    Constructor,
+    Dictionary,
+    DictionaryMember,
+    Inheritance,
+    Namespace,
+    NamespaceMember,
+    Stringifier,
+    Const,
+)
 
 from js_pyi.assertions import unhandled, expect_isinstance
 from js_pyi.conversion import reserved_keywords
 from js_pyi.datamodel import *
 
-_none = 'None'
+_none = "None"
 
 
 def i_symbol(symbol: Symbol):
@@ -24,7 +58,7 @@ def i_symbol(symbol: Symbol):
 def i_default(default: Default):
     expect_isinstance(default, Default)
     value = default.value
-    if '/*' in value:
+    if "/*" in value:
         unhandled(default)
     return value
 
@@ -40,8 +74,7 @@ def i_primitive_type(primitive_type: PrimitiveType):
     t = primitive_type.type
     if isinstance(t, Symbol):
         return i_symbol(t)
-    if isinstance(t, UnsignedIntegerType) or \
-            isinstance(t, UnrestrictedFloatType):
+    if isinstance(t, UnsignedIntegerType) or isinstance(t, UnrestrictedFloatType):
         s = str(t)
         return s
     unhandled(t)
@@ -56,14 +89,14 @@ def _wrap_if_nullable(o, suffix: TypeSuffix | None):
 
 def _wrap_if_generic(res, non_any_type: NonAnyType):
     if non_any_type.promise is not None:
-        return GGeneric('Promise', res)
+        return GGeneric("Promise", res)
     if non_any_type.sequence is not None:
-        return GGeneric('sequence', res)
+        return GGeneric("sequence", res)
     return res
 
 
 def i_any_type(any_type: AnyType):
-    return 'any'
+    return "any"
 
 
 def i_non_any_type(non_any_type: NonAnyType):
@@ -177,8 +210,8 @@ def i_interface_member__type_attribute(im: InterfaceMember):
 
     expect_isinstance(member.attribute, AttributeRest)
 
-    if im.name == 'global' or im.name == 'as':
-        unhandled('The keyword `global` cannot be used as a variable name ')
+    if im.name == "global" or im.name == "as":
+        unhandled("The keyword `global` cannot be used as a variable name ")
     attributes = i_type_with_extended_attributes(member.attribute.type)
     return GAttribute(im.name, attributes)
 
@@ -188,11 +221,11 @@ def i_interface_member(member: InterfaceMember):
 
     idl_type = member.idl_type
 
-    if idl_type == 'method':
+    if idl_type == "method":
         return i_interface_member__type_method(member)
-    if idl_type == 'attribute':
+    if idl_type == "attribute":
         return i_interface_member__type_attribute(member)
-    if idl_type == 'const':
+    if idl_type == "const":
         return i_interface_member__type_const(member)
     unhandled(idl_type)
 
@@ -205,7 +238,7 @@ def i_interface(interface: Interface | Mixin, throw: bool):
 
 def i_dictionary(dictionary: Dictionary, throw: bool):
     expect_isinstance(dictionary, Dictionary)
-    bases = ['TypedDict'] + i_inheritance(dictionary.inheritance)
+    bases = ["TypedDict"] + i_inheritance(dictionary.inheritance)
     members = [i_dictionary_member(construct) for construct in dictionary.members]
     members = list(filter(lambda s: s.name not in reserved_keywords, members))
     return GClass(dictionary.name, members, bases=bases)
@@ -377,9 +410,12 @@ def keep_unhandled(statements: List[GStmt]) -> List[GStmt]:
         if isinstance(st, GHasChildren):
             st.children = keep_unhand(st.children)
 
-    statements = list(filter(
-        lambda e: isinstance(e, GUnhandled)
-                  or (isinstance(e, GHasChildren) and len(e.children) > 0), statements)
+    statements = list(
+        filter(
+            lambda e: isinstance(e, GUnhandled)
+            or (isinstance(e, GHasChildren) and len(e.children) > 0),
+            statements,
+        )
     )
 
     return statements
