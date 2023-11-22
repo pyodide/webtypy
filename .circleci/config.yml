@@ -17,6 +17,7 @@ jobs:
             mkdir test-results
             # Mark pyodide as typed...
             python3.11 -c 'from pathlib import Path; import pyodide; (Path(pyodide.__path__[0]) / "py.typed").write_text("")'
+            python3.11 -c 'from pathlib import Path; import _pyodide; (Path(_pyodide.__path__[0]) / "py.typed").write_text("")'
             # install current package
             pip install .
             pytest --junitxml=test-results/junit.xml --verbose --color=yes

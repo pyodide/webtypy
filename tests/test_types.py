@@ -5,7 +5,7 @@ from collections.abc import Callable
 
 
 @pytest.mark.mypy_testing
-def type_exception():
+def type_exception() -> None:
     from js import DOMException
 
     raise DOMException.new("oops")
@@ -29,14 +29,14 @@ def type_fetch() -> None:
 
 
 @pytest.mark.mypy_testing
-def type_eval():
+def type_eval() -> None:
     from js import eval
 
     reveal_type(eval("abc"))  # R: Any
 
 
 @pytest.mark.mypy_testing
-def type_timeout(callback: Callable[[], None], timeout: int):
+def type_timeout(callback: Callable[[], None], timeout: int) -> None:
     from js import setTimeout, clearTimeout, setInterval, clearInterval
     from pyodide.ffi import JsProxy
 
@@ -48,7 +48,7 @@ def type_timeout(callback: Callable[[], None], timeout: int):
 
 
 @pytest.mark.mypy_testing
-def type_object():
+def type_object() -> None:
     from js import Object
     from pyodide.ffi import JsProxy
 
@@ -56,7 +56,7 @@ def type_object():
 
 
 @pytest.mark.mypy_testing
-def type_buffer(selenium):
+def type_buffer() -> None:
     from js import Uint8Array, ArrayBuffer
 
     a = Uint8Array.new(range(10))
@@ -75,7 +75,7 @@ def type_buffer(selenium):
 
 
 @pytest.mark.mypy_testing
-def type_json():
+def type_json() -> None:
     from js import JSON, Array
     from pyodide.ffi import to_js
     import json
@@ -105,7 +105,7 @@ def type_json():
 
 
 @pytest.mark.mypy_testing
-def type_document():
+def type_document() -> None:
     from js import document
 
     el = document.createElement("div")
@@ -123,7 +123,7 @@ def type_document():
 
 
 @pytest.mark.mypy_testing
-def type_canvas():
+def type_canvas() -> None:
     from js import document
 
     canvas = document.createElement("canvas")
