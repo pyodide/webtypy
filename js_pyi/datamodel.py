@@ -4,13 +4,22 @@ import typing
 from dataclasses import dataclass, field
 from typing import List, Optional
 
-from js_pyi.stringify import s_method, s_attribute, s_class, s_unhandled, s_enum, s_arg, s_typedef, s_ignored, s_const
+from js_pyi.stringify import (
+    s_method,
+    s_attribute,
+    s_class,
+    s_unhandled,
+    s_enum,
+    s_arg,
+    s_typedef,
+    s_ignored,
+    s_const,
+)
 
 
 class GPythonProducer:
-
     def to_python(self) -> str:
-        raise Exception(f'not implemented {type(self)}')
+        raise Exception(f"not implemented {type(self)}")
 
 
 class GStmt:
@@ -21,7 +30,8 @@ class GStmt:
 class GIgnoredStmt(GStmt, GPythonProducer):
     body_str: str
 
-    def to_python(self): return s_ignored(self)
+    def to_python(self):
+        return s_ignored(self)
 
 
 class GRootStmt(GStmt):
@@ -48,7 +58,8 @@ class GUnhandled(GStmt):
     body_str: str
     exception: Exception | None = None
 
-    def to_python(self): return s_unhandled(self)
+    def to_python(self):
+        return s_unhandled(self)
 
 
 @dataclass()
@@ -69,7 +80,7 @@ class GGeneric:
 
 @dataclass()
 class GNotRequired:
-    annotation: 'GAnnotation'
+    annotation: "GAnnotation"
 
 
 @dataclass()
@@ -77,7 +88,8 @@ class GClass(GRootStmt, GPythonProducer, GHasChildren, GHasName):
     bases: List[str] = field(default_factory=list)
     is_namespace: bool = False
 
-    def to_python(self): return s_class(self)
+    def to_python(self):
+        return s_class(self)
 
 
 GType = typing.Union[str, GGeneric]
@@ -91,13 +103,16 @@ class GNamedAnnotation(GHasName):
 
 @dataclass()
 class GAttribute(GStmt, GNamedAnnotation, GPythonProducer):
-    def to_python(self): return s_attribute(self)
+    def to_python(self):
+        return s_attribute(self)
 
 
 @dataclass()
 class GConst(GStmt, GHasName, GPythonProducer):
     value: str
-    def to_python(self): return s_const(self)
+
+    def to_python(self):
+        return s_const(self)
 
 
 @dataclass()
@@ -109,23 +124,26 @@ class GGeneric(GNamedAnnotation):
 class GArg(GNamedAnnotation, GPythonProducer):
     default: Optional[str] = None
 
-    def to_python(self): return s_arg(self)
+    def to_python(self):
+        return s_arg(self)
 
 
 @dataclass
 class GArgVariadic(GArg):
-    def to_python(self): return s_arg(self)
+    def to_python(self):
+        return s_arg(self)
 
 
 @dataclass
 class GMethod(GStmt, GPythonProducer):
     name: str
     arguments: List[GArg] = field(default_factory=list)
-    returns: Optional[GAnnotation] = 'undefined'
+    returns: Optional[GAnnotation] = "undefined"
     overload: bool = False
     classmethod: bool = False
 
-    def to_python(self): return s_method(self)
+    def to_python(self):
+        return s_method(self)
 
 
 @dataclass()
@@ -139,11 +157,13 @@ class GTypedef(GRootStmt, GPythonProducer):
     name: str
     annotation: GAnnotation = field(default_factory=list)
 
-    def to_python(self): return s_typedef(self)
+    def to_python(self):
+        return s_typedef(self)
 
 
 @dataclass
 class GEnum(GRootStmt, GPythonProducer, GHasName):
     values: List[str]
 
-    def to_python(self): return s_enum(self)
+    def to_python(self):
+        return s_enum(self)

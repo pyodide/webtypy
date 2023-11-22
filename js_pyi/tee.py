@@ -10,7 +10,7 @@ class Tee:
     def appendln(self, param):
         if self.output is not None:
             print(param, file=self.output)
-        self.buf.write(param + '\n')
+        self.buf.write(param + "\n")
 
     def __str__(self):
         return self.buf.getvalue()

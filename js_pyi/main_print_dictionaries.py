@@ -18,11 +18,11 @@ def print_dictionaries(files: List[Path] | None = None) -> bool:
         for st in sts:
             if not isinstance(st, GUnhandled):
                 continue
-            if 'dictionary ' not in st.body_str:
+            if "dictionary " not in st.body_str:
                 continue
-            print('=' * 50)
+            print("=" * 50)
             print(file)
-            print('-' * 50)
+            print("-" * 50)
             print(st.body_str)
 
 
@@ -30,5 +30,5 @@ def main():
     print_dictionaries()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

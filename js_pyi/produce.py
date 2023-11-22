@@ -38,15 +38,13 @@ def parse_product() -> bool:
             exceptions.append((file.name, traceback.format_exc(), python_code))
     print()
     for file, ex, python_code in exceptions:
-        print('=' * 50)
-        print('file', file)
-        print('-' * 50)
-        print('exception', ex)
-        print('-' * 50)
-        print('full source')
+        print("=" * 50)
+        print("file", file)
+        print("-" * 50)
+        print("exception", ex)
+        print("-" * 50)
+        print("full source")
         print(python_code)
 
     success = len(exceptions) == 0
     return success
-
-

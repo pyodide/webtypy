@@ -17,9 +17,9 @@ def unhandled(files: List[Path] | None = None) -> bool:
         sts = keep_unhandled(sts)
         if len(sts) > 0:
             python_code = s_statements(sts)
-            print('=' * 50)
+            print("=" * 50)
             print(file)
-            print('-' * 50)
+            print("-" * 50)
             print(python_code)
 
 
@@ -28,5 +28,5 @@ def main():
     unhandled()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
