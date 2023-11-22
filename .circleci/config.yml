@@ -15,6 +15,8 @@ jobs:
           name: Test
           command: |
             mkdir test-results
+            # Mark pyodide as typed...
+            python3.11 -c 'from pathlib import Path; import pyodide; (Path(pyodide.__path__[0]) / "py.typed").write_text("")'
             pytest --junitxml=test-results/junit.xml --verbose --color=yes
       - store_test_results:
           path: test-results
