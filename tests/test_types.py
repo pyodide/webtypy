@@ -17,7 +17,6 @@ def type_xmlhttprequest(url: str) -> StringIO:
 
     req = XMLHttpRequest.new()
     req.open("GET", url, False)
-    reveal_type(req.open)
     req.send()
     # this were a bit more specific
     reveal_type(req.response)  # R: Any
@@ -51,6 +50,7 @@ def type_timeout(callback: Callable[[], None], timeout: int):
 @pytest.mark.mypy_testing
 def type_object():
     from js import Object
+    from pyodide.ffi import JsProxy
 
     a: JsProxy = Object.fromEntries([[1, 2]])
 
