@@ -1,0 +1,22 @@
+version: '2.1'
+orbs:
+  python: circleci/python@1.1.0
+jobs:
+  build:
+    executor: python/default
+    steps:
+      - checkout
+      - python/install-packages:
+          pip-dependency-file: requirements.txt
+          pkg-manager: pip
+      - run:
+          name: Test
+          command: |
+            mkdir test-results
+            pytest --junitxml=test-results/junit.xml --verbose
+      - store_test_results:
+          path: test-results
+workflows:
+  main:
+    jobs:
+      - build
