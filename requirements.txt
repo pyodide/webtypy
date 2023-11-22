@@ -1,0 +1,4 @@
+pytest
+widlparser
+pyodide-py
+pytest-mypy-testing
