@@ -1,4 +1,5 @@
 """ingest and stringify tests"""
+
 from __future__ import annotations
 
 from js_pyi.assertions import expect_isinstance
