@@ -1,3 +1,42 @@
+[project]
+name = "webtypy"
+version = "0.1.8.dev1"
+description = "This module contains the DOM types for the majority of the web APIs used in a web browser. These can be used by an IDE to give type hinting and completion during the development using DOM apis."
+readme = "README.md"
+requires-python = ">=3.6"
+license = { file = "LICENCE" }
+authors = [{ name = "Simone Giacomelli", email = "simone.giacomelli@gmail.com" }]
+keywords = []
+classifiers = [
+    "License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)",
+]
+
+[project.urls]
+Homepage = "https://github.com/pyodide/webtypy"
+
+[project.optional-dependencies]
+dev = [
+    "pytest==8.3.4",
+    "widlparser==1.1.5",
+    "black==23.1.0"
+]
+pypi = [
+    "build==0.6.0.post1",
+    "twine==3.4.2",
+    "wheel==0.37.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["js-stubs"]
+
+[tool.setuptools.package-data]
+"*" = ["py.typed", "*.pyi"]
+
+[tool.setuptools]
+zip-safe = false
+include-package-data = true
+
 [build-system]
 requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
