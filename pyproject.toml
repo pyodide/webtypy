@@ -1,6 +1,6 @@
 [project]
 name = "webtypy"
-version = "0.1.8.dev1"
+version = "0.1.8.dev2"
 description = "This module contains the DOM types for the majority of the web APIs used in a web browser. These can be used by an IDE to give type hinting and completion during the development using DOM apis."
 readme = "README.md"
 requires-python = ">=3.6"
@@ -18,7 +18,7 @@ Homepage = "https://github.com/pyodide/webtypy"
 dev = [
     "pytest==8.3.4",
     "widlparser==1.1.5",
-    "black==23.1.0"
+    "black==24.10.0"
 ]
 pypi = [
     "build==0.6.0.post1",
