@@ -236,12 +236,10 @@ def test_interface():
             "Document",
             bases=["Blob"],
             children=[
-                (
-                    GMethod(
-                        "createElement",
-                        arguments=[GArg("localName", "DOMString")],
-                        returns="FooElement",
-                    )
+                GMethod(
+                    "createElement",
+                    arguments=[GArg("localName", "DOMString")],
+                    returns="FooElement",
                 )
             ],
         )
@@ -252,7 +250,7 @@ def test_complete_interface():
     _verify_root_stmt(
         "interface Doc : Blob  { attribute Blob baz; } ",
         "class Doc(Blob):\n    baz: Blob",
-        GClass("Doc", bases=["Blob"], children=[(GAttribute("baz", "Blob"))]),
+        GClass("Doc", bases=["Blob"], children=[GAttribute("baz", "Blob")]),
     )
 
 
@@ -262,7 +260,7 @@ def test_namespace():
         "class ConsoleNamespace:\n    def log(self, *data: Any): ...",
         GClass(
             "console",
-            children=[(GMethod("log", [GArgVariadic("data", "any")]))],
+            children=[GMethod("log", [GArgVariadic("data", "any")])],
             is_namespace=True,
         ),
     )
