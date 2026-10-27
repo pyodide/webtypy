@@ -4,7 +4,7 @@ version = "0.1.8.dev2"
 description = "This module contains the DOM types for the majority of the web APIs used in a web browser. These can be used by an IDE to give type hinting and completion during the development using DOM apis."
 readme = "README.md"
 requires-python = ">=3.6"
-license = { file = "LICENCE" }
+license = { file = "LICENSE" }
 authors = [{ name = "Simone Giacomelli", email = "simone.giacomelli@gmail.com" }]
 keywords = []
 classifiers = [
